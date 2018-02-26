@@ -6,13 +6,13 @@ export class Place {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     placeName: string;
 
-    @Column()
+    @Column({ unique: true })
     city: string;
 
-    @Column()
+    @Column({ unique: true })
     indoor: boolean;
 
 }
