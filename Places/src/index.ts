@@ -3,7 +3,18 @@ import {createConnection} from "typeorm";
 import {Place} from "./entity/Places";
 import app from './App';
 
-createConnection().then(async connection => {
+createConnection({
+  type: "mysql",
+  host: "localhost",
+  port: 3306,
+  username: "root",
+  database: "Places",
+  entities: [
+      Place
+  ],
+  synchronize: true,
+  logging: false
+}).then(async connection => {
 
     console.log("Inserting a new user into the database...");
     const place = new Place();
@@ -18,6 +29,5 @@ createConnection().then(async connection => {
     console.log("Loaded users: ", places);
      
     console.log("Here you can setup and run express/koa/any other framework.");
-  const port = process.env.PORT || 9090;  
 
 }).catch(error => console.log(error));
