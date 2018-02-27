@@ -6,13 +6,28 @@ export class Place {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true })
+    @Column()
+    address_components: string;
+    
+    @Column()
+    lat: number;
+
+    @Column()
+    lng: number;
+
+    @Column()
     placeName: string;
 
-    @Column({ unique: true })
-    city: string;
+    @Column()
+    review?: string;
 
-    @Column({ unique: true })
-    indoor: boolean;
+    @Column()
+    rating?: number;
 
+    @Column()
+    type: string;
+
+    @Column()
+    website?: string;
+    
 }

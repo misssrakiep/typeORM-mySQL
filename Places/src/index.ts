@@ -18,7 +18,7 @@ createConnection({
 
     console.log("Inserting a new user into the database...");
     const place = new Place();
-    place.placeName = "Arabian nights";
+    place.placeName = "Grand West Casino";
     place.city = "Cape Town";
     place.indoor = true;
     await connection.manager.save(place);
