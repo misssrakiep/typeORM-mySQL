@@ -32,17 +32,33 @@ createConnection({
      
     // console.log("Here you can setup and run express/koa/any other framework.");
 
+    let address_components:string = "16 Panton Road, Fairways";
+    let lat:number = 0;
+    let lng:number = 0;
+    let placeName:string = "my House";
+    let review:string = "There is a dog outside";
+    let rating:number = 0;
+    let type:string = "Home";
+    let website:string = "No website";
+
+    let values = {
+        address_components: address_components,
+        lat: lat,
+        lng: lng,
+        placeName: placeName,
+        review: review,
+        rating: rating,
+        type: type,
+        website: website
+
+    }
+
+
     const place = await getConnection()
     .createQueryBuilder()
     .insert()
     .into(Place)
-    .values([
-        { address_components: "Timber",
-        lat: 65.76568,
-        lng: 76.83765884,
-        placeName: "Somewhere",
-        type: "Club" }
-     ])
+    .values(values)
     .execute();
 
     // const getPlace = await getConnection()
@@ -52,6 +68,5 @@ createConnection({
     // .getMany();
 
 console.log("New Place added:" ,place);
-console.log(getPlace);
 
 }).catch(error => console.log(error));
