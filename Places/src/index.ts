@@ -8,7 +8,7 @@ import {Place} from "./entity/Places";
 createConnection({
   type: "mysql",
   host: "localhost",
-  port: 4000,
+  port: 3306,
   username: "root",
   database: "Places",
   entities: [
