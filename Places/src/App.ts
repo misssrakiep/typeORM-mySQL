@@ -1,7 +1,7 @@
 import * as express from 'express';
 import {Request, Response} from "express";
 import {Place} from "./entity/Places";
-import {getConnection} from "typeorm";
+import {getConnection, getRepository} from "typeorm";
 
 
     let address_components:string = "16 Panton Road, Fairways";
@@ -47,11 +47,13 @@ class App {
         })
 
         router.get('/api/entries', (req, res) => {
-            const placesInfo = getConnection()
-            .createQueryBuilder()
-            .from(Place, "place")
-            .getMany();
-            res.json(placesInfo)
+
+            getRepository(Place)
+            .createQueryBuilder("place")
+            .getMany()
+            .then(result => {
+                res.json(result)
+            })
         })
 
         this.express.use('/', router)
