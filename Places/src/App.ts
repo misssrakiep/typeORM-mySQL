@@ -34,7 +34,25 @@ class App {
 
     private mountRoutes(): void {
         const router = express.Router()
-        router.get('/api/allEntries', allEntries)
+
+        router.get('/api/allEntries', (req, res) => {
+            const place = getConnection()
+            .createQueryBuilder()
+            .insert()
+            .into(Place)
+            .values(values)
+            .execute();
+
+            res.json(place)
+        })
+
+        router.get('/api/entries', (req, res) => {
+            const placesInfo = getConnection()
+            .createQueryBuilder()
+            .from(Place, "place")
+            .getMany();
+            res.json(placesInfo)
+        })
 
         this.express.use('/', router)
 
@@ -42,14 +60,5 @@ class App {
 }
 
 
-var allEntries = (req, res) => {
-    const place = getConnection()
-    .createQueryBuilder()
-    .insert()
-    .into(Place)
-    .values(values)
-    .execute();
-    res.json(values)
-}
 
 export default new App().express
