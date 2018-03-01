@@ -35,7 +35,7 @@ class App {
     private mountRoutes(): void {
         const router = express.Router()
 
-        router.get('/api/allEntries', (req, res) => {
+        router.post('/api/allEntries', (req, res) => {
             const place = getConnection()
             .createQueryBuilder()
             .insert()

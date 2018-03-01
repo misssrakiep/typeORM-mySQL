@@ -1,7 +1,10 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, Index} from "typeorm";
 
 @Entity()
+@Index(["address_components", "placeName"], { unique: true })
+
 export class Place {
+
 
     @PrimaryGeneratedColumn()
     id: number;
