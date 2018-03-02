@@ -4,14 +4,8 @@ import {Place} from "./entity/Places";
 import {getConnection, getRepository} from "typeorm";
 
 
-    let address_components:string = "16 Panton Road, Fairways";
-    let lat:number = 0;
-    let lng:number = 0;
-    let placeName:string = "my House";
-    let review:string = "There is a dog outside";
-    let rating:number = 0;
-    let type:string = "Home";
-    let website:string = "No website";
+
+
 
     let values = {
         address_components: address_components,
@@ -53,8 +47,11 @@ class App {
             .getMany()
             .then(result => {
                 res.json(result)
+                console.log(result);
+                
             })
         })
+
 
         this.express.use('/', router)
 
