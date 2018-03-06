@@ -1,62 +1,59 @@
 import * as express from 'express';
-import {Request, Response} from "express";
-import {Place} from "./entity/Places";
-import {getConnection, getRepository} from "typeorm";
+import { Request, Response } from "express";
+import { Place } from "./entity/Places";
+import { getConnection, getRepository } from "typeorm";
+import * as $ from "jquery";
+import * as bodyParser from "body-parser";
 
 
 
-
-
-    let values = {
-        address_components: address_components,
-        lat: lat,
-        lng: lng,
-        placeName: placeName,
-        review: review,
-        rating: rating,
-        type: type,
-        website: website
-    }
 
 class App {
     public express
-    
+
     constructor() {
         this.express = express()
+        this.middleware()
         this.mountRoutes()
+    }
+
+    private middleware(): void {
+        this.express.use(bodyParser.urlencoded({'extended':true})); // parse expresslication/x-www-form-urlencoded
+        this.express.use(bodyParser.json()); // parse application/json
+        this.express.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', "*");
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+            res.header('Access-Control-Allow-Headers', '"Origin, X-Requested-With, Content-Type, Accept"');
+            next();
+        });
     }
 
     private mountRoutes(): void {
         const router = express.Router()
 
-        router.post('/api/allEntries', (req, res) => {
-            const place = getConnection()
+        router.post('/api/postEntry', (req, res) => {            
+             getConnection()
             .createQueryBuilder()
             .insert()
-            .into(Place)
-            .values(values)
+            .into( Place )
+            .values(req.body)
             .execute();
-
-            res.json(place)
+            console.log("done");
+            
         })
 
-        router.get('/api/entries', (req, res) => {
+        router.get('/api/allEntries', (req, res) => {
 
             getRepository(Place)
-            .createQueryBuilder("place")
-            .getMany()
-            .then(result => {
-                res.json(result)
-                console.log(result);
-                
-            })
+                .createQueryBuilder("place")
+                .from(Place, "place")
+                .getMany()
         })
-
-
         this.express.use('/', router)
 
-    } 
+    }
 }
+
 
 
 
