@@ -1,8 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, Index} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+
 
 @Entity()
-@Index(["address_components", "placeName"], { unique: true })
-
 export class Place {
 
 
@@ -10,13 +9,10 @@ export class Place {
     id: number;
 
     @Column()
-    address_components: string;
+    address_components?: string;
     
     @Column()
-    lat: number;
-
-    @Column()
-    lng: number;
+    latlng: number;
 
     @Column()
     placeName: string;
@@ -28,7 +24,7 @@ export class Place {
     rating?: number;
 
     @Column()
-    type: string;
+    type?: string;
 
     @Column()
     website?: string;
