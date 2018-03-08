@@ -3,6 +3,7 @@ import {createConnection} from "typeorm";
 import {getConnection} from "typeorm";
 import app from './App';
 import {Place} from "./entity/Places";
+import {Reviews} from "./entity/Reviews"
 
 createConnection({
   type: "mysql",
@@ -11,7 +12,8 @@ createConnection({
   username: "root",
   database: "Places",
   entities: [
-      Place
+      Place,
+      Reviews
   ],
   synchronize: true,
   logging: false

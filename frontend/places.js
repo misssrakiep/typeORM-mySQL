@@ -8,21 +8,23 @@ var center = new google.maps.LatLng(0, 0);
 
 
 
-
+//initialise a new google map using users current location as center pin
 function initialize() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             console.log(position.coords.toString())
             if (position) {
                 document.getElementById('loadingScreen').style.display = 'none';
+                document.querySelector('.placeDetails').style.display = "block";
             }
             center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map = new google.maps.Map(document.getElementById('map'), {
                 center: center,
-                zoom: 13
+                zoom: 11
             });    
         
         
+//make a request for surrounding places of interest to show
             var request = {
                 location: center,
                 radius: 8047,
