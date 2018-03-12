@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {getManager} from "typeorm";
+import {getManager, getRepository} from "typeorm";
 import {Reviews} from "../entity/Reviews";
 
 /**
@@ -8,11 +8,18 @@ import {Reviews} from "../entity/Reviews";
 export async function reviewSaveAction(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
-    const reviewsRepository = getManager().getRepository(Reviews);
+    const reviewsRepository = getRepository(Reviews);
+    let data = request.body;
 
     // create a real post object from post json object sent over http
-    const newReview = reviewsRepository.create(request.body);
+    const newReview = new Reviews;
 
+    newReview.user_name = data.user_name;
+    newReview.rating = data.rating;
+    newReview.review = data.review;
+    newReview.pictures = data.pictures;
+    newReview.place = data.place;
+    
     // save received post
     await reviewsRepository.save(newReview);
 

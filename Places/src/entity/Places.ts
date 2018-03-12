@@ -18,9 +18,6 @@ export class Place {
     placeName: string;
 
     @Column()
-    rating?: number;
-
-    @Column()
     type?: string;
 
     @Column()

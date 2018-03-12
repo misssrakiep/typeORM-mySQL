@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {getManager} from "typeorm";
+import {getRepository} from "typeorm";
 import {Place} from "../entity/Places";
 
 /**
@@ -8,10 +8,19 @@ import {Place} from "../entity/Places";
 export async function placePostAction(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
-    const myPlaceRepository = getManager().getRepository(Place);
+    const myPlaceRepository = getRepository(Place);
+    let data = request.body;
+
 
     // create a real post object from post json object sent over http
-    const newPlace = myPlaceRepository.create(request.body);
+    const newPlace = new Place();
+
+    newPlace.placeName = data.placeName;
+    newPlace.type = data.type;
+    newPlace.website = data.website;
+    newPlace.address_components = data.address_components;
+    newPlace.latlng = data.latlng;
+    newPlace.review = data.review;
 
     // save received post
     await myPlaceRepository.save(newPlace);
