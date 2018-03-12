@@ -82,6 +82,13 @@ var CommandUtils = /** @class */ (function () {
             });
         });
     };
+    CommandUtils.fileExists = function (filePath) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, fs.existsSync(filePath)];
+            });
+        });
+    };
     return CommandUtils;
 }());
 exports.CommandUtils = CommandUtils;

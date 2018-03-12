@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne} from "typeorm";
+import { Place } from "./Places";
 
 
 @Entity()
@@ -19,4 +20,7 @@ export class Reviews {
 
     @Column()
     pictures?: string;
+
+    @ManyToOne(type => Reviews, reviews => reviews.place)
+    place : Place
 }

@@ -14,4 +14,5 @@ export declare class CommandUtils {
      * Reads everything from a given file and returns its content as a string.
      */
     static readFile(filePath: string): Promise<string>;
+    static fileExists(filePath: string): Promise<boolean>;
 }

@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
+import { Reviews } from './Reviews';
 
 @Entity()
 export class Place {
@@ -18,9 +18,6 @@ export class Place {
     placeName: string;
 
     @Column()
-    review?: string;
-
-    @Column()
     rating?: number;
 
     @Column()
@@ -29,4 +26,7 @@ export class Place {
     @Column()
     website?: string;
     
+    @OneToMany(type => Place, place => place.review)
+    review?: Reviews;
+
 }

@@ -70,11 +70,11 @@ var EntityCreateCommand = /** @class */ (function () {
     };
     EntityCreateCommand.prototype.handler = function (argv) {
         return __awaiter(this, void 0, void 0, function () {
-            var fileContent, filename, directory, connectionOptionsReader, connectionOptions, err_1, path, err_2;
+            var fileContent, filename, directory, connectionOptionsReader, connectionOptions, err_1, path, fileExists, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 6, , 7]);
+                        _a.trys.push([0, 7, , 8]);
                         fileContent = EntityCreateCommand.getTemplate(argv.name);
                         filename = argv.name + ".ts";
                         directory = argv.dir;
@@ -93,18 +93,24 @@ var EntityCreateCommand = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 4:
                         path = process.cwd() + "/" + (directory ? (directory + "/") : "") + filename;
-                        return [4 /*yield*/, CommandUtils_1.CommandUtils.createFile(path, fileContent)];
+                        return [4 /*yield*/, CommandUtils_1.CommandUtils.fileExists(path)];
                     case 5:
+                        fileExists = _a.sent();
+                        if (fileExists) {
+                            throw "File " + chalk.blue(path) + " already exists";
+                        }
+                        return [4 /*yield*/, CommandUtils_1.CommandUtils.createFile(path, fileContent)];
+                    case 6:
                         _a.sent();
                         console.log(chalk.green("Entity " + chalk.blue(path) + " has been created successfully."));
-                        return [3 /*break*/, 7];
-                    case 6:
+                        return [3 /*break*/, 8];
+                    case 7:
                         err_2 = _a.sent();
                         console.log(chalk.black.bgRed("Error during entity creation:"));
                         console.error(err_2);
                         process.exit(1);
-                        return [3 /*break*/, 7];
-                    case 7: return [2 /*return*/];
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/];
                 }
             });
         });
