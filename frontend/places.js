@@ -28,7 +28,7 @@ function initialize() {
             var request = {
                 location: center,
                 radius: 8047,
-                types: ['cafe']
+                types: ['point_of_interest']
             };    
             infoWindow = new google.maps.InfoWindow();
         
@@ -88,7 +88,7 @@ function placeMap() {
     var request = {
         location: center,
         radius: 8047,
-        types: ['cafe']
+        types: ['']
     };
     
     var service = new google.maps.places.PlacesService(map);

@@ -22,5 +22,5 @@ export class Reviews {
     pictures?: string;
 
     @ManyToOne(type => Reviews, reviews => reviews.place)
-    place : Place
+    place ?: Place
 }

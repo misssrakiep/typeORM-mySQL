@@ -7,9 +7,6 @@ export class Place {
 
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    address_components?: string;
     
     @Column()
     latlng: number;
