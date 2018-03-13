@@ -4,24 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <h4>send review to db</h4>
-  <input type="text" name="user_name" id="user_name" placeholder="user name"><br>
-  <input type="number" name="rating" id="rating" placeholder="rating"><br>  
-  <input type="text" name="review" id="review" placeholder="review"><br> 
-  <input type="text" name="pictures" id="pictures" placeholder="upload your pictures"><br>
-        <button id="submitReview">Submit Review</button>
-
-
+    <input type="text" name="user_name" id="user_name" placeholder="user name"><br>
+    <input type="number" name="rating" id="rating" placeholder="rating"><br>  
+    <input type="text" name="review" id="review" placeholder="review"><br> 
+    <input type="text" name="pictures" id="pictures" placeholder="upload your pictures"><br>
+    <button id="submitReview">Submit Review</button>
+    
+    
     <h4>save my location</h4>
     <input type="text" name="placeName" id="placeName" placeholder="Where are you now?"><br>
     <input type="text" name="type" id="type" placeholder="What type of place would you say this is?"><br>
     <input type="text" name="website" id="website" placeholder="Does this place have a website?"><br>
-    <button id="savePlace">Save my Location</button>    
+    <button id="savePlace">Save my Location</button>  
+    
+    <!-- handlebars for places (placee route) -->
+    <div class="placeCard">
+    <script type="text/handlebars-x" class="placeTemp">
+            {{#each results}}
+            {{this.placeName}}<br>
+            {{this.type}}<br>
+            {{this.website}}<br>
+            {{this.latlng}}<br>
+            {{/each}}
+        </script>
+    </div><br>
+
+    <!-- handlebars for reviews (getReviews route) -->
+        <div class="reviewCard">
+        <script type="text/handlebars-x" class="reviewTemp">
+            {{#each results}}
+            {{user_name}}<br>
+            {{rating}}<br>
+            {{review}}<br>
+            {{pictures}}<br>
+            {{/each}}
+        </script>
+    </div><br>
+    
+    
+    
+    
+    
     <!-- require all js files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

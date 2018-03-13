@@ -2,6 +2,10 @@ $(document).ready(function() {
     getLocation();
     showPosition();
 //ajax call to bring all places as console.log
+
+var placeTemp = $('.placeTemp').html();
+var placeText = Handlebars.compile(placeTemp);
+
 $.ajax({
     headers: { "Accept": "application/json"},
     type: "GET",
@@ -9,9 +13,18 @@ $.ajax({
     dataType: "json",
     success: function(results){
         console.log(results);
+        results.forEach(function (item, index){
+            $('.placeCard').html(placeText({
+                results: results
+            }));
+        });
     }
 });
 //ajax call to get all reviews as a console.log
+
+    var reviewTemp = $('.reviewTemp').html();
+    var reviewText = Handlebars.compile(reviewTemp);
+
 $.ajax({
     headers: { "Accept": "application/json"},
     type: "GET",
@@ -19,6 +32,11 @@ $.ajax({
     dataType: "json",
     success: function(results){
         console.log(results);
+        results.forEach(function (item, index){
+            $('.reviewCard').html(reviewText({
+               results: results
+            }));
+        })
     }
 });
 //ajax call to get all places via id as a console.log
@@ -37,6 +55,7 @@ $.ajax({
 
 //////////////////////////////////////////////////
 //ajax call to send reviews to db
+
 
 $('#submitReview').click(function () {
     let user_name = $("#user_name").val();
@@ -58,9 +77,11 @@ $('#submitReview').click(function () {
         data: JSON.stringify(reviewPost),
         success: function(results){
             console.log(results);
+           
         } 
-        })
+        });
     })
+
 //ajax call to send my geolocation to db
 
 
