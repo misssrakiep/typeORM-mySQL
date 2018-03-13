@@ -37,14 +37,13 @@
         <div class="reviewCard">
         <script type="text/handlebars-x" class="reviewTemp">
             {{#each results}}
-            {{user_name}}<br>
-            {{rating}}<br>
-            {{review}}<br>
-            {{pictures}}<br>
+            {{this.user_name}}<br>
+            {{this.rating}}<br>
+            {{this.review}}<br>
+            <img src="{{this.pictures}}" alt="">
             {{/each}}
         </script>
     </div><br>
-    
     
     
     
