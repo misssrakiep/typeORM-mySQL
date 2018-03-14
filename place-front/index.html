@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+    .add-on .input-group-btn > .btn {
+  border-left-width: 0;
+  left: -2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-color: #cccccc;
+}
+</style>
+</head>
+<body>
+    <!-- <div class="container"> -->
+        
+    <div class="d-inline">
+        <div id="map" style="width:50%;height:400px;float:left"></div>
+        <img src="http://www.mrcapetown.co.za/wp-content/uploads/2011/08/cape-town-photo1.jpg" style="width:50%;height:400px;" alt="" srcset="">
+    </div>
+
+        <br></br>
+        <div class="input-group mb-3 add-on">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-default">
+                <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+        <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" data-toggle="list">Place1</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="list">Place2</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="list">Place3</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="list">Place4</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="list">Place5</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="list">Place6</a>
+            </div>  
+        
+    <!-- </div> -->
+    
+    
+    <script src="main.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxl1wK2CnB9hXlU3eGp-VRPJn28Ml3nI&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
