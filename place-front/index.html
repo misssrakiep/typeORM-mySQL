@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <style>
         #map{
-            margin-top: 18px;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -20,8 +20,8 @@
 <body>
     <div class="container">
         
-            <div class="row">
-                    <div class="col s12 m6">
+            <div class="row col s12">
+                    <div class="col s6 m6">
                       <div class="card small blue lighten-2">
                         <div class="card-content white-text">
                           <span class="card-title">Place Details:</span>
@@ -29,9 +29,16 @@
                         </div>
                       </div>
                     </div>
-                    <div id="map" style="width:50%;height:310px;"></div>
+                    <div id="map" class="col s6 m5" style="width:50%;height:300px;"></div>
                 </div>
                 <br>
+                <form>
+                        <div class="input-field">
+                          <input id="search" type="search" required>
+                          <label for="search"><i class="material-icons">search</i></label>
+                          <i class="material-icons">close</i>
+                        </div>
+                      </form>
 
                 <ul class="collection">
                         <li class="collection-item avatar">
@@ -78,5 +85,6 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="main.js"></script>
+    <script src="../frontend/places.js"></script>
 </body>
 </html>
