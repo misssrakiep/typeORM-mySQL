@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  
     var map;
     function createMap() {
       map = new google.maps.Map(document.getElementById('map'), {
