@@ -28,11 +28,22 @@ body {
 .mapIcon {
     width: 100%;
 }
-#homeRow, #placeRow {
-    background-color: rgba(255, 255, 255, 0.479);
+#homeRow, .collection, #otherPlace {
+    background-color: rgba(255, 255, 255, 0.295);
     background: blur(4px);
 }
 #placeRow {
     margin-bottom: 1.5em;
 }
-
+.indeterminate{
+    display: none;
+}
+#loader {
+    display: none;
+}
+#homeAdd , #homeless{
+    display: none;
+}
+#homeless{
+    font-size: 1.5em
+}
