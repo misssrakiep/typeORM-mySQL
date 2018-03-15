@@ -1,5 +1,13 @@
-var map;
+var places = {
+  name : "Urban Chic Boutique Hotel",
+  rating : "3.6",
+  address : "172 Long Street, Corner of Long street & Pepper street, Cape Town",
+  image : "http://urbanchic.co.za/wp-content/uploads/Urban-Chic-Hotel-Slide-04.jpg",
+  website : "http://urbanchic.co.za/"
+};
+var reviews = {
 
+};
  var map;
   function initialize() {
    var center = new google.maps.LatLng(37.422, -122.084058);
@@ -11,30 +19,34 @@ var map;
 
   google.maps.event.addDomListener(window, 'load', initialize);
 
-//   this is the slide show code
-var slideIndex = 1;
-showSlides(slideIndex);
+var placeDetailsTemp = $('.placeDetailsTemp').html();
+var placeDetailsText = Handlebars.compile(placeDetailsTemp);
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+$(document).ready(function() {
+  $('#placeDetails').html(placeDetailsText({
+    name : "Urban Chic Boutique Hotel",
+    rating : "3.6",
+    address : "172 Long Street, Corner of Long street & Pepper street, Cape Town",
+    image : "http://urbanchic.co.za/wp-content/uploads/Urban-Chic-Hotel-Slide-04.jpg",
+    website : "http://urbanchic.co.za/"
+  }))
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+  var reviewsTemp = $('.reviewsTemp').html();
+  var reviewsText = Handlebars.compile(reviewsTemp);
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
+  $.ajax({
+    headers: { "Accept": "application/json"},
+    type: "GET",
+    url: "http://localhost:3000/api/getReviews",
+    dataType: "json",
+    success: function(results){
+        console.log(results);
+        results.forEach(function (item, index){
+            $('.reviewDetails').html(reviewsText({
+               results: results
+            }));
+        })
+    }
+});
+
+})
