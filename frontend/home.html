@@ -1,0 +1,86 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="home.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="col s4 m4 mapIcon"><img src="img/icon-mapa.png" alt=""></div>
+            <div class="col s8 m8"></div>                
+        </div>
+        <div class="container">
+            <!-- ONLY ONE HOME TAB -->
+                <div class="row">
+                        <div id="homeRow" class="col s12 m12 z-depth-1">
+                            <div class="card col s0 m4">
+                              <img src="img/flat-home-icon-e17b1-fnal-570x456.jpg" alt="" class="responsive-img">
+                            </div>
+                            <div class="card-content col s11 m7">
+                                <h4><i class="material-icons">location_on</i>Home</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                            </div>
+                            <div class="col s1 m1">
+                                <button class="addBtn btn-floating waves-effect waves-light red">
+                                        <i class="material-icons addIcon">add</i>
+                                </button>
+                            </div>
+                        </div>
+                      </div>
+
+                      <!-- OTHER LOCATIONS INPUT BY THE USER -->
+                      <center>
+                          <div class="elseHead"><h2>Somewhere else today?</h2></div>
+                          //search bar to search places
+                      </center>
+                      <div class="elsewhere">
+                          <script type="text/handlebars-x" class="placeTemp">
+                          <div class="row" id="otherPlace">
+                                {{#if results}}
+                                {{#each results}}
+                                <div id="placeRow" class="col s12 m12 z-depth-1">
+                                    <div class="card col s0 m4">
+                                      <center><img src="img/678111-map-marker-512.png" alt="" class="responsive-img pin"></center>
+                                    </div>
+                                    <div class="card-content col s12 m8">
+                                        <h4><i class="material-icons">location_on</i>{{this.placeName}}</h4>
+                                        {{this.type}}<br>
+                                        {{this.website}}<br>
+                                    </div>
+                                    </div>
+                                    {{/each}}
+                                    {{/if}}
+                                </div>
+                                <br>
+                            </script>
+                        </div>
+                        <div class="fixed-action-btn horizontal">
+                            <a data-target="modal1" href="#modal1" class="btn-floating btn-large waves-effect waves-light modal-trigger red"><i class="material-icons">add</i></a>
+                        </div>
+        </div>
+        <div id="modal1" class="modal bottom-sheet">
+                <div class="modal-content">
+                  <h4>Modal Header</h4>
+                  <input type="text" name="placeName" id="placeName" placeholder="Name your current place">
+                  <input type="text" name="website" id="website" placeholder="Does this place have a website?">
+                  
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" id="placeAdd" class="modal-action modal-close waves-effect waves-green btn-flat">Save my location</a>
+                </div>
+              </div>
+      <!--Import jQuery before materialize.js-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+      <script src="home.js"></script>
+    </body>
+  </html>
