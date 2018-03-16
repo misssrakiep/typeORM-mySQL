@@ -18,3 +18,7 @@ body {
 li {
   width: 50%
 }
+ul.collection {
+
+  display: flex;
+}
