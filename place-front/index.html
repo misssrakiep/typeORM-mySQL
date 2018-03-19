@@ -41,20 +41,18 @@
                       </form>
                       <br>
                 <ul class="collection">
-                  
                   <script type="text/handlebars-x" class="nearbyTemp">
-                    {{if nearbyLoc}}
                     {{#each nearbyLoc}}
                       <li class="collection-item avatar">
                       <i class="material-icons circle blue">folder</i>
                           <span class="title">{{this.name}}</span>
-                          <p>First Line <br>
+                          <p>{{this.vicinity}} <br>
                              Second Line
                           </p>
                           <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
                         </li>
                           {{/each}}
-                          {{/if}}
+          
                          </script>
                       </ul>
     

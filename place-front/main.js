@@ -1,9 +1,7 @@
-// $(document).ready(function(){
-
 var map;
 var infowindow;
 var currentLoc = [];
-var nearbyLoc = {};
+var nearbyLoc = [];
 
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
@@ -34,10 +32,13 @@ var nearbyText = Handlebars.compile(nearbyTemp);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
-            nearbyLoc = results[i];
+            nearbyLoc.push(results[i]);
           }
         }
-        console.log(nearbyLoc);
+        console.log(nearbyLoc); 
+        $('.collection').html(nearbyText({
+          nearbyLoc: nearbyLoc,
+        }))
         
       }
 
@@ -54,5 +55,36 @@ var nearbyText = Handlebars.compile(nearbyTemp);
         });
         
       }
+$(document).ready(function(){
 
-// });
+    // $.ajax({
+    //   headers: { "Accept": "application/json" },
+    //   type: "GET",
+    //   url: "http://localhost:3000/api/myPlace",
+    //   dataType: "json",
+    //   success: function (results) {
+    //     console.log(results);
+    //     results.forEach(function (item, index) {
+    //         results: results
+    //     })
+    //   }
+    // });
+
+
+
+    // $.ajax({
+    //   headers: { "Accept": "application/json" },
+    //   type: "GET",
+    //   url: "http://localhost:3000/api/places",
+    //   dataType: "json",
+    //   success: function (results) {
+    //     console.log(results);
+    //     results.forEach(function (item, index) {
+    //       $('.collection').html(nearbyText({
+    //         results: results
+    //       }));
+    //     })
+    //   }
+    // });
+
+});
