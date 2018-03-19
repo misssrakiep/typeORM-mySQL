@@ -24,7 +24,7 @@
                       <div class="card small blue-grey lighten-4">
                         <div class="card-content">
                           <span class="card-title"><h4>I/O Digital:</h4></span>
-                          <p>Address: 31 - 33 Loop Street, City Centre, Cape Town, 8001</p>
+                          <p>Address: 31 Loop Street, City Centre, Cape Town, 8001</p>
                         </div>
                       </div>
                     </div>
@@ -41,40 +41,21 @@
                       </form>
                       <br>
                 <ul class="collection">
-                  <!-- <script type="text/handlebars-x" class="nearbyTemp"> -->
-                        <li class="collection-item avatar">
-                        <i class="material-icons circle blue">folder</i>
-                          <span class="title">POI1</span>
+                  
+                  <script type="text/handlebars-x" class="nearbyTemp">
+                    {{if nearbyLoc}}
+                    {{#each nearbyLoc}}
+                      <li class="collection-item avatar">
+                      <i class="material-icons circle blue">folder</i>
+                          <span class="title">{{this.name}}</span>
                           <p>First Line <br>
                              Second Line
                           </p>
                           <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
                         </li>
-                        <li class="collection-item avatar">
-                          <i class="material-icons circle purple">folder</i>
-                          <span class="title">POI2</span>
-                          <p>First Line <br>
-                             Second Line
-                          </p>
-                          <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
-                        </li>
-                        <li class="collection-item avatar">
-                          <i class="material-icons circle green">insert_chart</i>
-                          <span class="title">POI3</span>
-                          <p>First Line <br>
-                             Second Line
-                          </p>
-                          <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
-                        </li>
-                        <li class="collection-item avatar">
-                          <i class="material-icons circle red">play_arrow</i>
-                          <span class="title">POI4</span>
-                          <p>First Line <br>
-                             Second Line
-                          </p>
-                          <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
-                        </li>
-                         <!-- </script> -->
+                          {{/each}}
+                          {{/if}}
+                         </script>
                       </ul>
     
        
@@ -89,7 +70,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="main.js"></script>
-    <!-- <script src="../frontend/places.js"></script> -->
+
 </body>
 
 </html>

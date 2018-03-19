@@ -2,7 +2,8 @@
 
 var map;
 var infowindow;
-var nearbyLoc = [];
+var currentLoc = [];
+var nearbyLoc = {};
 
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
@@ -22,6 +23,8 @@ var nearbyText = Handlebars.compile(nearbyTemp);
           radius: 200,
           type: ['restaurant']
         }, callback);
+        currentLoc.push(home);
+        console.log(currentLoc);
         
         console.log("---------------------------");
       }
@@ -31,7 +34,7 @@ var nearbyText = Handlebars.compile(nearbyTemp);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
-            nearbyLoc.push(results[i])
+            nearbyLoc = results[i];
           }
         }
         console.log(nearbyLoc);
