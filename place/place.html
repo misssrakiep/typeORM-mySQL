@@ -28,33 +28,54 @@
             {{name}}<br>
             {{rating}}<br>
             {{address}}<br>
+            {{open_hours}}
+            {{#if types}} {{#each types}}
+            <li>{{types}}</li>
+            {{/each}} {{/if}}
             <a href="{{website}}">Website</a>
           </script>
         </div>
       </div>
     </div>
   </div>
-  <div class="container row center" id="reveiwDetailsPane">
-    <div class="center reviewDetails col s12 m12">
-      <script type="text/handlebars-x" class="reviewsTemp">
-        {{#if results}} {{#each results}} 
-        <div class="center col s12 m7">
-          <h2 class="header">Reviews and Ratings</h2>
-          <div class="card horizontal">
-            <div class="card-image">
-              <img class = "img" src="{{this.pictures}}" alt="image" style="width:100%" >
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <H3>{{this.user_name}}</H3>
-                <p>{{this.rating}}</p>
-                <p>{{this.review}}</p>
-              </div>
-            </div>
+  <script type="text/handlebars-x" class="reviewsTemp">
+    {{#if results}} {{#each results}}
+  <div class="col s12 m12">
+      <div class="card horizontal">
+        <div class="card-image">
+            <img class="img" src="{{this.pictures}}" alt="" style="width:100%">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+              <h3>{{this.user_name}}</h3>
+              <div class="star-ratings-css">
+                  <div class="star-ratings-css-top" style="width: {{this.rating}}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <br>
+          <div>
+              <p>{{this.review}}</p>
           </div>
         </div>
-        {{/each}} {{/if}}
-          </script>
+      </div>
+    </div>
+    {{/each}} {{/if}}
+  </script>
+  <div class="container row" id="reveiwDetailsPane">
+    <div class=" reviewDetails col s12 m12">
+
+      <div class="collection row">
+        <div class="collection-item col s6 m6">
+
+
+
+        </div>
+        <div class="collection-item col s6 m6">
+        </div>
+        <br>
+        <br>
+
+      </div>
+      </script>
     </div>
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
       <i class="material-icons">add</i>
@@ -67,13 +88,13 @@
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">mode_edit</i>
-          <textarea id="user_name" class="materialize-textarea"></textarea>
+          <textarea id="user_name" class="user_name materialize-textarea"></textarea>
           <label for="user_name">User Name:</label>
         </div>
         <div class="input-field col s6">
           <p>Add Photo(s):</p>
           <i class="material-icons prefix">add_a_photo</i>
-          <input id="icon_prefix3" class="review" type="file" multiple>
+          <input id="icon_prefix3" class="pictures" type="file" multiple>
         </div>
       </div>
       <div class="row">
