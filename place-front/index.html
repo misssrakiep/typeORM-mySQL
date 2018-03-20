@@ -11,6 +11,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 </head>
 
@@ -22,10 +23,18 @@
             <div class="row col s12">
                     <div class="col s6 m6">
                       <div class="card small blue-grey lighten-4">
+                        <div class="currentLoc">
+                          <script type="text/handlebars-x" class="currentTemp">
+                            
                         <div class="card-content">
-                          <span class="card-title"><h4>I/O Digital:</h4></span>
-                          <p>Address: 31 Loop Street, City Centre, Cape Town, 8001</p>
+                          {{#each currentLoc}}
+                          <span class="card-title"><h4>{{this.name}}:</h4></span>
+                          <p>{{this.address}}</p>
+                          {{/each}}
                         </div>
+                        
+                      </script>
+                    </div>
                       </div>
                     </div>
                     <div id="map" class="col s6 m5" style="width:50%;height:300px;"></div>
@@ -40,14 +49,16 @@
                         </div>
                       </form>
                       <br>
-                <ul class="collection">
-                  <script type="text/handlebars-x" class="nearbyTemp">
-                    {{#each nearbyLoc}}
-                      <li class="collection-item avatar">
-                      <i class="material-icons circle blue">folder</i>
-                          <span class="title">{{this.name}}</span>
-                          <p>{{this.vicinity}} <br>
-                             Second Line
+                      <ul class="collection">
+                        <script type="text/handlebars-x" class="nearbyTemp">
+                          {{#each nearbyLoc}}
+                          <li class="collection-item avatar">
+                            <i class="material-icons circle blue">folder</i>
+                            <span class="title">{{this.name}}</span>
+                            <p>{{this.vicinity}} <br>
+                              Rating: {{this.rating }} 
+                             {{#each ratings}}{{this}} {{/each}} <br>
+                              Type: {{this.types }}
                           </p>
                           <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
                         </li>
@@ -64,6 +75,7 @@
     
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places&callback=initMap"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
