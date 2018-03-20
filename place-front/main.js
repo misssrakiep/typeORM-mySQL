@@ -9,8 +9,16 @@ var nearbyText = Handlebars.compile(nearbyTemp);
 var currentTemp = $('.currentTemp').html();
 var currentText = Handlebars.compile(currentTemp);
 
+var arr=[
+  {key1:'value1', open:{
+    now: false
+  }},
+  {key2:'value2'}
+];
+console.log(arr[0].open.now);
+
       function initMap() {
-        var home = new google.maps.LatLng(-33.919775800,18.421124400);
+        var home = new google.maps.LatLng(-33.919815,18.421095);
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: home,
@@ -24,14 +32,16 @@ var currentText = Handlebars.compile(currentTemp);
           radius: 200,
           type: ['restaurant']
         }, callback);
+        
         currentLoc.push({
           name: 'I/O Digital',
           address: '31 Loop Street, City Centre, Cape Town, 8001'
         });
+        
         console.log(currentLoc);
 
         $('.currentLoc').html(currentText({
-          currentLoc: currentLoc[0]
+          currentLoc: currentLoc
         }))
         
         console.log("---------------------------");
@@ -46,16 +56,20 @@ var currentText = Handlebars.compile(currentTemp);
           }
         }
 
-        var getRating = $(function () {
+        var getRating = $(function (rate) {
           nearbyLoc.forEach(rating => {
             $("#rateYo").rateYo({
               rating: nearbyLoc.rating,
-              readOnly: true
+              readOnly: true,
+              starWidth: "24px"
             });
+            var rate = document.createElement('div').setAttribute('id', 'rateYo');
           })
         });
           
         console.log(nearbyLoc); 
+        console.log(nearbyLoc[3].opening_hours.open_now);
+        
         $('.collection').html(nearbyText({
           nearbyLoc: nearbyLoc,
           ratings: getRating
@@ -64,14 +78,14 @@ var currentText = Handlebars.compile(currentTemp);
       }
 
       function createMarker(place) {
-        var placeLoc = place.geometry.location;
+        // var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: new google.maps.LatLng(-33.919815,18.421095)
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
+          infowindow.setContent("I/O Digital");
           infowindow.open(map, this);
         });
         

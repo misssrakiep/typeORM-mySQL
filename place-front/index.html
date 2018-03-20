@@ -23,17 +23,18 @@
             <div class="row col s12">
                     <div class="col s6 m6">
                       <div class="card small blue-grey lighten-4">
+                        <div class="currentLoc">
                           <script type="text/handlebars-x" class="currentTemp">
                             
-                        {{#currentLoc}}
-                        <div class="currentLoc">
                         <div class="card-content">
+                          {{#each currentLoc}}
                           <span class="card-title"><h4>{{this.name}}:</h4></span>
                           <p>{{this.address}}</p>
-                          </div>
+                          {{/each}}
                         </div>
-                        {{/currentLoc}}
+                        
                       </script>
+                    </div>
                       </div>
                     </div>
                     <div id="map" class="col s6 m5" style="width:50%;height:300px;"></div>
@@ -56,7 +57,7 @@
                             <span class="title">{{this.name}}</span>
                             <p>{{this.vicinity}} <br>
                               Rating: {{this.rating }} 
-                              {{#ratings}} <div id="rateYo"></div> {{/ratings}} <br>
+                             {{#each ratings}}{{this}} {{/each}} <br>
                               Type: {{this.types }}
                           </p>
                           <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
