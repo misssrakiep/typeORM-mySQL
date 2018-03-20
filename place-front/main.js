@@ -6,6 +6,9 @@ var nearbyLoc = [];
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
 
+var currentTemp = $('.currentTemp').html();
+var currentText = Handlebars.compile(currentTemp);
+
       function initMap() {
         var home = new google.maps.LatLng(-33.919775800,18.421124400);
 
@@ -21,13 +24,20 @@ var nearbyText = Handlebars.compile(nearbyTemp);
           radius: 200,
           type: ['restaurant']
         }, callback);
-        currentLoc.push(home);
+        currentLoc.push({
+          name: 'I/O Digital',
+          address: '31 Loop Street, City Centre, Cape Town, 8001'
+        });
         console.log(currentLoc);
+
+        $('.currentLoc').html(currentText({
+          currentLoc: currentLoc[0]
+        }))
         
         console.log("---------------------------");
       }
 
-
+      
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
@@ -35,11 +45,22 @@ var nearbyText = Handlebars.compile(nearbyTemp);
             nearbyLoc.push(results[i]);
           }
         }
+
+        var getRating = $(function () {
+          nearbyLoc.forEach(rating => {
+            $("#rateYo").rateYo({
+              rating: nearbyLoc.rating,
+              readOnly: true
+            });
+          })
+        });
+          
         console.log(nearbyLoc); 
         $('.collection').html(nearbyText({
           nearbyLoc: nearbyLoc,
+          ratings: getRating
         }))
-        
+                
       }
 
       function createMarker(place) {
