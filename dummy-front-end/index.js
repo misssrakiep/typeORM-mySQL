@@ -9,7 +9,7 @@ var placeText = Handlebars.compile(placeTemp);
 $.ajax({
     headers: { "Accept": "application/json"},
     type: "GET",
-    url: "http://localhost:3000/api/places",
+    url: "http://167.99.40.78:9090/api/places",
     dataType: "json",
     success: function(results){
         console.log(results);
@@ -28,7 +28,7 @@ $.ajax({
 $.ajax({
     headers: { "Accept": "application/json"},
     type: "GET",
-    url: "http://localhost:3000/api/getReviews",
+    url: "http://167.99.40.78:9090/api/getReviews",
     dataType: "json",
     success: function(results){
         console.log(results);
@@ -41,12 +41,12 @@ $.ajax({
 });
 //ajax call to get all places via id as a console.log
 
-let id = 14;
+let id = 1;
 
 $.ajax({
     headers: { "Accept": "application/json"},
     type: "GET",
-    url: "http://localhost:3000/api/places/" + id,
+    url: "http://167.99.40.78:9090/api/places/" + id,
     dataType: "json",
     success: function(results){
         console.log(results);
@@ -73,7 +73,7 @@ $('#submitReview').click(function () {
     $.ajax({
         headers: { "Content-Type": "application/json", "Accept": "application/json"},
         type: "POST",
-        url: "http://localhost:3000/api/reviews",
+        url: "http://167.99.40.78:9090/api/places/"+ id+ "/postReview",
         data: JSON.stringify(reviewPost),
         success: function(results){
             console.log(results);
@@ -115,10 +115,10 @@ $('#savePlace').click(function () {
     var website = $("#website").val();
 
         var data = {
-            placeName: placeName,
-            type: type,
-            website: website,
-            latlng: "123"
+            "placeName": placeName,
+            "type": type,
+            "website": website,
+            "latlng": "123"
         }
         
         console.log(data);
@@ -126,7 +126,7 @@ $('#savePlace').click(function () {
         $.ajax({
             type: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json"},
-            url: "http://localhost:3000/api/myPlace",
+            url: "http://167.99.40.78:9090/api/myPlace",
             data: JSON.stringify(data),
             success: function(results){
             console.log(results);
