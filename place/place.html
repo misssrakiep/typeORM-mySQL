@@ -13,6 +13,7 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxl1wK2CnB9hXlU3eGp-VRPJn28Ml3nI&libraries=places"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 </head>
+
 <body>
   <br>
   <div class="container">
@@ -23,7 +24,7 @@
         </div>
         <div id="placeDetails" class="col s11 m6">
           <script type="text/handlebars-x" class="placeDetailsTemp">
-            <img src="{{image}}" alt="" style="width:100%"><br>
+            <img src="{{image}}" alt="image" style="width:100%"><br>
             {{name}}<br>
             {{rating}}<br>
             {{address}}<br>
@@ -33,23 +34,33 @@
       </div>
     </div>
   </div>
-  <div class="container row" id="reveiwDetailsPane">
-    <div class=" reviewDetails col s12 m12">
+  <div class="container row center" id="reveiwDetailsPane">
+    <div class="center reviewDetails col s12 m12">
       <script type="text/handlebars-x" class="reviewsTemp">
-          <ul class="collection">
-            {{#if results}}
-            {{#each results}}
-              <li class="collection-item" >{{this.user_name}}</li>
-              <li class="collection-item" >{{this.rating}}</li>
-              <li class="collection-item" >{{this.review}}</li>
-              <img class = "img" src="{{this.pictures}}" alt="" width = "170" height = "170">
-              {{/each}}
-              {{/if}}
-            </ul>
-            <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+        {{#if results}} {{#each results}} 
+        <div class="center col s12 m7">
+          <h2 class="header">Reviews and Ratings</h2>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img class = "img" src="{{this.pictures}}" alt="image" style="width:100%" >
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <H3>{{this.user_name}}</H3>
+                <p>{{this.rating}}</p>
+                <p>{{this.review}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}} {{/if}}
           </script>
     </div>
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
+      <i class="material-icons">add</i>
+    </a>
   </div>
+  
   <!-- Modal Structure -->
   <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
@@ -70,15 +81,15 @@
           <p>Rate:</p>
           <div id="rateYo" class="rating"></div>
         </div>
-          <div class="input-field col s6">
-            <i class="material-icons prefix">mode_edit</i>
-            <textarea id="icon_prefix2" class="materialize-textarea review"></textarea>
-            <label for="icon_prefix2">Review:</label>
-          </div> 
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <textarea id="icon_prefix2" class="materialize-textarea review"></textarea>
+          <label for="icon_prefix2">Review:</label>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button id="submitReview" class="modal-action modal-close waves-effect waves-green btn-flat" >add</button>
+      <button id="submitReview" class="modal-action modal-close waves-effect waves-green btn-flat">add</button>
     </div>
   </div>
   <!--Import jQuery before materialize.js-->
