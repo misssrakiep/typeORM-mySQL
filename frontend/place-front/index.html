@@ -50,6 +50,7 @@
                       </form>
                       <br>
                       <ul class="collection">
+                        
                         <script type="text/handlebars-x" class="nearbyTemp">
                           {{#each nearbyLoc as |item index|}}
                           <li class="collection-item avatar">
@@ -57,7 +58,7 @@
                             <span class="title">{{this.name}}</span>
                             <p>{{this.vicinity}} <br>
                               
-                              <label for"{{placeRating index}}">Rating:<div id="{{placeRating index}}"></div></label>
+                              <label for"{{placeRating index}}">Rating:{{this.rating}}<div id="{{placeRating index}}"></div></label>
                               Type: {{this.types }}
                           </p>
                           <a href="../place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
@@ -73,13 +74,14 @@
 
     
     
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places&callback=initMap"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="main.js"></script>
+    <script src="../home.js"></script>
 
 </body>
 
