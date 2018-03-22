@@ -37,7 +37,7 @@
               <p><b>{{address}}</b><br>
             {{type}}<br>
             {{place_id}}</p>
-            <a href="place-front/index.html" class="secondary-content"><button id="currPlace" value="{{this.place_id}}"><i class="material-icons">add_location</i> find nearby places</button></a>
+            <a class="secondary-content"><button id="placeBtn" value="{{this.place_id}}"><i class="material-icons">add_location</i> find nearby places</button></a>
           </li>
           {{/if}}
           </ul>
@@ -50,9 +50,8 @@
         <li class="collection-item avatar">
             <i class="material-icons circle">location_on</i>
             <span class="title">{{this.placeName}}</span>
-          <p>{{this.type}}<br>
-          {{this.address}}</p>
-          <a href="place-front/index.html"><button id="findMyPlaces" value="{{this.place_id}}" class="btn-small orange right">find nearby places</button></a>        </li>
+          <p>{{this.address}}</p>
+          <a href="place-front/index.html"><button id="findMyPlaces" value="{{this.id}}" class="btn-small orange right">find nearby places</button></a>        </li>
         {{else}}
         <li class="collection-item avatar">
             <i class="material-icons circle">location_on</i>
@@ -88,7 +87,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-<!-- <script src="place-front/main.js"></script> -->
+<script src="place-front/main.js"></script>
 <script src="home.js"></script>
 
 </html>

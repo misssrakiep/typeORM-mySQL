@@ -1,22 +1,26 @@
+const API_URL = "http://167.99.40.78:9090";
+
 $(document).ready(function () {
     $('.modal').modal();
 
+
     function initMap() {
-        var mapProp= {
-            center:new google.maps.LatLng(51.508742,-0.120850),
-            zoom:5,
+        var mapProp = {
+            center: new google.maps.LatLng(51.508742, -0.120850),
+            zoom: 5,
         };
-        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
 
-        var currentLocationTemp = $(".currentLocationTemp").html();
-        var currentLocationText = Handlebars.compile(currentLocationTemp);
+    var currentLocationTemp = $(".currentLocationTemp").html();
+    var currentLocationText = Handlebars.compile(currentLocationTemp);
 
 
-        var myPlacesTemp = $(".myPlacesTemp").html();
-        var placesText = Handlebars.compile(myPlacesTemp);
+    var myPlacesTemp = $(".myPlacesTemp").html();
+    var placesText = Handlebars.compile(myPlacesTemp);
 
-        var currentLocation = {};
+    var currentLocation = {};
+
     $("#findLoc").click(function () {
         document.querySelector(".indeterminate").style.display = "block";
         getLocation();
@@ -35,7 +39,7 @@ $(document).ready(function () {
                         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
 
-                                var result = results[0]; 
+                                var result = results[0];
 
                                 var myPlace = {
                                     placeName: "My Place",
@@ -47,14 +51,14 @@ $(document).ready(function () {
                                 };
 
                                 console.log(myPlace);
-                          
+
                                 $.ajax({
                                     headers: { "Content-Type": "application/json" },
                                     type: "POST",
-                                    url: "http://167.99.40.78:9090/api/myPlace",
+                                    url: API_URL + "/api/myPlace",
                                     dataType: "json",
                                     data: JSON.stringify(myPlace),
-                                    success: function(results) {
+                                    success: function (results) {
                                         console.log("call made: ", results);
                                     }
                                 })
@@ -62,11 +66,8 @@ $(document).ready(function () {
                                 $(".myLocation").html(currentLocationText({
                                     address: myPlace.address,
                                     type: myPlace.type,
-                                    place_id: myPlace.place_id                                 
+                                    place_id: myPlace.place_id
                                 }));
-
-
-                            
                             }
 
                         })
@@ -77,29 +78,30 @@ $(document).ready(function () {
         }
     });
 
-$("#placeAdd").click(function () {
-var placeName = $("#placeName").val();
-var website = $("#website").val();
 
-    var data = {
-        placeName: placeName,
-        type: "MyPlace",
-        website: website,
-        lat: currentLocation.lat,
-        lng: currentLocation.lng
-    }
-    $.ajax({
-        headers: { "Accept": "application/json" },
-        type: "POST",
-        url: "http://167.99.40.78:9090/api/myPlace",
-        dataType: "json",
-        data: JSON.stringify(data),
-        success: function(results) {
-            console.log("call made: ", results);
+    $("#placeAdd").click(function () {
+        var placeName = $("#placeName").val();
+        var website = $("#website").val();
+
+        var data = {
+            placeName: placeName,
+            type: "MyPlace",
+            website: website,
+            lat: currentLocation.lat,
+            lng: currentLocation.lng
         }
-    })
+        $.ajax({
+            headers: { "Accept": "application/json" },
+            type: "POST",
+            url: API_URL + "/api/myPlace",
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (results) {
+                console.log("call made: ", results);
+            }
+        })
 
-});
+    });
 
 
     var otherPlaces = [];
@@ -107,7 +109,7 @@ var website = $("#website").val();
     $.ajax({
         headers: { "Accept": "application/json" },
         type: "GET",
-        url: "http://167.99.40.78:9090/api/places",
+        url: API_URL + "/api/places",
         dataType: "json",
         success: function (results) {
             console.log(results);
