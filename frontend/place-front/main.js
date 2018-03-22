@@ -3,6 +3,9 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 
+console.log(myPlace);
+
+
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
 
@@ -104,9 +107,9 @@ var currentText = Handlebars.compile(currentTemp);
         });
           
 
-        nearbyLoc.forEach(opening_hours => {
-          console.log(opening_hours.opening_hours);
-        });
+        // nearbyLoc.forEach(opening_hours => {
+        //   console.log(opening_hours.opening_hours);
+        // });
 
 
 
