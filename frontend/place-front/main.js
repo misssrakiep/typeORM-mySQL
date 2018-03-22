@@ -3,37 +3,48 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 
-console.log(myPlace);
+$("#back_home").click(function(){
+  document.getElementById("home-page").style.display = "block";
+  document.querySelector(".places-page").style.display = "none";
+});
 
 
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
 
-var currentTemp = $('.currentTemp').html();
+var currentTemp = $(".currentTemp").html();
 var currentText = Handlebars.compile(currentTemp);
+var placeDetails = {};
+
 var placeLocation = {};
+$(".myPlaces").click(function (event) {
+  console.log("click");
 
-$("#findMyPlaces").click(function(event){
-  console.log("................");
-  
   var id = event.target.value;
-
   $.ajax({
-    headers: { "Accept": "application/json"},
+    headers: { "Accept": "application/json" },
     type: "GET",
     url: API_URL + "/api/places/" + id,
     dataType: "json",
-    success: function(results){
-        console.log("one",results);
-    placeLocation.lat = results.lat;
-    placeLocation.lng = results.lng;
+    success: function (results) {
+      console.log("one", results);
+      placeDetails.lat = results.lat;
+      placeDetails.lng = results.lng;
+      placeDetails.placeName = results.placeName;
+      placeDetails.address = results.address;
+      placeDetails.place_id = results.place_id;
+      console.log(placeDetails.lat, placeDetails.lng);
+      document.getElementById("home-page").style.display = "none";
+      document.querySelector(".places-page").style.display = "block";
+      currentLoc.push({
+        name: placeDetails.placeName,
+        address: placeDetails.address
+      });
+      initMap();
 
-    }
-});
-})
 
-    function initMap() {
-        var home = new google.maps.LatLng(placeLocation.lat, placeLocation.lng);
+      function initMap() {
+        var home = new google.maps.LatLng(placeDetails.lat, placeDetails.lng);
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: home,
@@ -46,111 +57,115 @@ $("#findMyPlaces").click(function(event){
           radius: 400,
           type: ['restaurant']
         }, callback);
-        
-        currentLoc.push({
-          name: 'I/O Digital',
-          address: '31 Loop Street, City Centre, Cape Town, 8001'
-        });
-        
+
+
+
+        console.log(currentLoc);
+
+        $(".currentLoc").html(currentText({
+          currentLoc: currentLoc
+        }))
         console.log(currentLoc);
 
       }
 
+    }
+  });
+})
 
 
-      
-      function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-            nearbyLoc.push(results[i]);
-          }
-        }
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+      nearbyLoc.push(results[i]);
+    }
+  }
 
-        var getRating = $(function (rate) {
-          nearbyLoc.forEach((item, index) => {
-            $("#rateYo"+index).rateYo({
-              rating: item.rating,
-              readOnly: true,
-              starWidth: "24px"
-            });
-            // var rate = document.createElement('div').setAttribute('id', 'rateYo' + index);
-            // rateThis.push(rate)
-          })
-        });
-          
-
-        // nearbyLoc.forEach(opening_hours => {
-        //   console.log(opening_hours.opening_hours);
-        // });
+  var getRating = $(function (rate) {
+    nearbyLoc.forEach((item, index) => {
+      $("#rateYo" + index).rateYo({
+        rating: item.rating,
+        readOnly: true,
+        starWidth: "24px"
+      });
+      // var rate = document.createElement('div').setAttribute('id', 'rateYo' + index);
+      // rateThis.push(rate)
+    })
+  });
 
 
-
-        console.log(nearbyLoc); 
-        
-        $('.collection').html(nearbyText({
-          nearbyLoc: nearbyLoc,
-          ratings: getRating
-        }))
-                
-      }
-
-      function createMarker(place) {
-        // var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: map,
-          position: new google.maps.LatLng(-33.919815,18.421095)
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(currentLoc[0].name);
-          infowindow.open(map, this);
-        });
-        
-      }
-
-$(document).ready(function(){
-
-    // $.ajax({
-    //   headers: { "Accept": "application/json" },
-    //   type: "GET",
-    //   url: "http://localhost:9090/api/myPlace",
-    //   dataType: "json",
-    //   success: function (results) {
-    //     console.log("------------");
-        
-    //     console.log(results);
-    //     console.log("---------------");
-        
-    //     results.forEach(function (item, index) {
-    //         results: results
-    //     })
-    //   }
-    // });
+  // nearbyLoc.forEach(opening_hours => {
+  //   console.log(opening_hours.opening_hours);
+  // });
 
 
 
-    // $.ajax({
-    //   headers: { "Accept": "application/json" },
-    //   type: "GET",
-    //   url: "http://localhost:9090/api/places",
-    //   dataType: "json",
-    //   success: function (results) {
-    //     console.log("-----------------");
-        
-    //     console.log(results);
-    //     console.log("-----------------");
-        
-    //     results.forEach(function (item, index) {
-    //       $('.collection').html(nearbyText({
-    //         results: results
-    //       }));
-    //     })
-    //   }
-    // });
+  console.log(nearbyLoc);
 
-    Handlebars.registerHelper( 'placeRating', function(index) {
-      return "rateYo" + index;
+  $('#collection').html(nearbyText({
+    nearbyLoc: nearbyLoc,
+    ratings: getRating
+  }))
+
+}
+
+function createMarker(place) {
+  // var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: new google.maps.LatLng(-33.919815, 18.421095)
+  });
+
+  google.maps.event.addListener(marker, 'click', function () {
+    infowindow.setContent(currentLoc[0].name);
+    infowindow.open(map, this);
+  });
+
+}
+
+$(document).ready(function () {
+
+  // $.ajax({
+  //   headers: { "Accept": "application/json" },
+  //   type: "GET",
+  //   url: "http://localhost:9090/api/myPlace",
+  //   dataType: "json",
+  //   success: function (results) {
+  //     console.log("------------");
+
+  //     console.log(results);
+  //     console.log("---------------");
+
+  //     results.forEach(function (item, index) {
+  //         results: results
+  //     })
+  //   }
+  // });
+
+
+
+  // $.ajax({
+  //   headers: { "Accept": "application/json" },
+  //   type: "GET",
+  //   url: "http://localhost:9090/api/places",
+  //   dataType: "json",
+  //   success: function (results) {
+  //     console.log("-----------------");
+
+  //     console.log(results);
+  //     console.log("-----------------");
+
+  //     results.forEach(function (item, index) {
+  //       $('.collection').html(nearbyText({
+  //         results: results
+  //       }));
+  //     })
+  //   }
+  // });
+
+  Handlebars.registerHelper('placeRating', function (index) {
+    return "rateYo" + index;
   });
 
 });

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="home-page">
     <div class="home center-align z-depth-5">
       <div id="homePic" class="circle">
         <img src="http://icons.iconarchive.com/icons/fps.hu/free-christmas-flat-circle/512/home-icon.png" alt="">
@@ -22,13 +22,13 @@
       </div>
       <button id="findLoc" class="btn-large">find my location</button>
 
-      
+
       <br>
       <div class="progress">
         <div class="indeterminate"></div>
       </div>
       <div class="myLocation">
-          <script type="text/handlebars-x" class="currentLocationTemp">
+        <script type="text/handlebars-x" class="currentLocationTemp">
           <ul class="collection">
           {{#if address}}
           <li class="collection-item avatar">
@@ -42,7 +42,7 @@
           {{/if}}
           </ul>
           </script>
-          </div>
+      </div>
       <div class="myPlaces">
         <script type="text/handlebars-x" class="myPlacesTemp">
     <ul class="collection">
@@ -51,7 +51,8 @@
             <i class="material-icons circle">location_on</i>
             <span class="title">{{this.placeName}}</span>
           <p>{{this.address}}</p>
-          <a href="place-front/index.html"><button id="findMyPlaces" value="{{this.id}}" class="btn-small orange right">find nearby places</button></a>        </li>
+          <button id="findBtn" value="{{this.id}}" class="btn-small waves-effect waves-light orange right">find nearby places</button>
+        </li>
         {{else}}
         <li class="collection-item avatar">
             <i class="material-icons circle">location_on</i>
@@ -80,6 +81,63 @@
       </div>
     </div>
   </div>
+  <!-- ....................................................... -->
+  <div class="places-page">
+    <div class="row col s12">
+      <div class="col s6 m6">
+        <div class="card small blue-grey lighten-4">
+          <div class="currentLoc">
+            <script type="text/handlebars-x" class="currentTemp">
+              
+          <div class="card-content">
+            {{#currentLoc}}
+            <span class="card-title"><h4>{{this.name}}:</h4></span>
+            <p>{{this.address}}</p>
+            {{/currentLoc}}
+          </div>
+          
+        </script>
+          </div>
+        </div>
+      </div>
+      <div id="map" class="col s6 m6" style="width:50%;height:300px;"></div>
+    </div>
+
+    <br>
+    <form>
+      <div class="input-field">
+        <input id="search" type="search" class="lime-text" required>
+        <label for="search">
+          <i class="material-icons lime-text">search</i>
+        </label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+    <br>
+    <ul class="collection">
+      <div id="collection">
+        <script type="text/handlebars-x" class="nearbyTemp">
+              {{#each nearbyLoc as |item index|}}
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">place</i>
+                <span class="title">{{this.name}}</span>
+                <p>{{this.vicinity}} <br>
+                  
+                  <label for"{{placeRating index}}">Rating:{{this.rating}}<div id="{{placeRating index}}"></div></label>
+                  Type: {{this.types }}
+              </p>
+              <a href="place/place.html" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+            </li>
+              {{/each}}
+             </script>
+      </div>
+    </ul>
+    <div id="back_home" class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light blue">
+        <i class="material-icons">arrow_back</i>
+      </a>
+    </div>
+  </div>
 </body>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -87,7 +145,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-<script src="place-front/main.js"></script>
 <script src="home.js"></script>
+<script src="place-front/main.js"></script>
 
 </html>

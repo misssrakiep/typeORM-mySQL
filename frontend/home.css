@@ -8,3 +8,6 @@
 body {
     background: grey;
 }
+.places-page{
+    display: none
+}
