@@ -95,12 +95,14 @@ function getLocation() {
         console.log("Geolocation is not supported by this browser.");
     }
 }
-var currentLocation = [];
+var currentLocation = {};
 
 function showPosition(position) {
     if (position) {
-        currentLocation.push(position.coords);
+        currentLocation.lat = position.coords.latitude;
+        currentLocation.lng = position.coords.longitude;
         console.log(position.coords.latitude, position.coords.longitude);
+        console.log(currentLocation);
         
     }
 }
@@ -115,10 +117,11 @@ $('#savePlace').click(function () {
     var website = $("#website").val();
 
         var data = {
-            "placeName": placeName,
-            "type": type,
-            "website": website,
-            "latlng": "123"
+            placeName: placeName,
+            type: type,
+            website: website,
+            lat: currentLocation.lat,
+            lng: currentLocation.lng
         }
         
         console.log(data);

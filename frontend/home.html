@@ -1,56 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home</title>
   <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
+
 <body>
   <div class="container">
-  <div class="home center-align">
-    <div id="homePic" class="circle"><img src="http://icons.iconarchive.com/icons/fps.hu/free-christmas-flat-circle/512/home-icon.png" alt=""></div>
-<button id="findLoc" class="btn-large">find my location</button><br><br> 
-<button id="findMyPlaces" class="dropdown-trigger btn-large orange" data-target='dropdown1'>find my places</button>  
-<div class="myPlaces">
-  <script type="text/handlebars-x" class="myPlacesTemp">
+    <div class="home center-align z-depth-5">
+      <div id="homePic" class="circle">
+        <img src="http://icons.iconarchive.com/icons/fps.hu/free-christmas-flat-circle/512/home-icon.png" alt="">
+        <div id="googleMap"></div>
+      </div>
+      <button id="findLoc" class="btn-large">find my location</button>
+
+      
+      <br>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+      <div class="myLocation">
+          <script type="text/handlebars-x" class="currentLocationTemp">
+          <ul class="collection">
+          {{#if address}}
+          <li class="collection-item avatar">
+              <i class="material-icons circle">home</i>
+              <span class="title">Current location</span>
+              <p><b>{{address}}</b><br>
+            {{type}}<br>
+            {{place_id}}</p>
+            <a href="place-front/index.html" class="secondary-content"><button id="currPlace" value="{{this.place_id}}"><i class="material-icons">add_location</i> find nearby places</button></a>
+          </li>
+          {{/if}}
+          </ul>
+          </script>
+          </div>
+      <div class="myPlaces">
+        <script type="text/handlebars-x" class="myPlacesTemp">
     <ul class="collection">
       {{#each results}}
         <li class="collection-item avatar">
             <i class="material-icons circle">location_on</i>
             <span class="title">{{this.placeName}}</span>
-          <p>{{this.type}}</p>
-          <a href="" class="secondary-content"><i class="material-icons">list</i></a>
+          <p>{{this.type}}<br>
+          {{this.address}}</p>
+          <a href="place-front/index.html"><button id="findMyPlaces" value="{{this.place_id}}" class="btn-small orange right">find nearby places</button></a>        </li>
+        {{else}}
+        <li class="collection-item avatar">
+            <i class="material-icons circle">location_on</i>
+            <span class="title">No locations</span>
         </li>
         {{/each}}
         </ul>
   </script>
-</div>
-  </div>
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-  </div>
-  <div id="modal1" class="modal bottom-sheet">
+      </div>
+    </div>
+    <div data-target="modal1" class="fixed-action-btn modal-trigger">
+      <a class="btn-floating btn-large waves-effect waves-light red">
+        <i class="material-icons">add</i>
+      </a>
+    </div>
+    <div id="modal1" class="modal bottom-sheet">
       <div class="modal-content">
         <h4>Where art thou today?</h4>
+        <input type="radio" value="">
         <input type="text" name="placeName" id="placeName" placeholder="Name your current place">
         <input type="text" name="website" id="website" placeholder="Does this place have a website?">
-        
+
       </div>
       <div class="modal-footer">
         <a href="#!" id="placeAdd" class="modal-action modal-close waves-effect waves-green btn-flat">Save my location</a>
       </div>
     </div>
-   </div>
-  </body>
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-  <script src="home.js"></script>
+  </div>
+</body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<!-- <script src="place-front/main.js"></script> -->
+<script src="home.js"></script>
+
 </html>

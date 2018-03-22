@@ -1,0 +1,10 @@
+.indeterminate {
+    display: none;
+}
+.home {
+    background-color: rgba(255, 255, 255, 0.527);
+    background: blur(10px);
+}
+body {
+    background: grey;
+}

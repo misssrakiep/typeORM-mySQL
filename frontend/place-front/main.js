@@ -24,7 +24,7 @@ console.log(arr[0].open.now);
           center: home,
           zoom: 15
         });
-
+        var geocoder = new google.maps.Geocoder;
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
@@ -47,6 +47,49 @@ console.log(arr[0].open.now);
         console.log("---------------------------");
       }
 
+
+      /////////////////////////////////////////
+      //takes current location from home page and reverse to find address
+      $('#findLoc').click(function() {
+        document.querySelector(".indeterminate").style.display = "block";
+        var currentLocation;
+        //show the preloader until it gets a location
+        console.log("HHEERREE");
+        
+        function getLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+              console.log("Geolocation is not supported by this browser.");
+          }
+      }
+      
+      function showPosition(position) {
+          if(position){
+  //once there is a position it needs to show the place and hide the preloader 
+  document.querySelector(".indeterminate").style.display = "none";                   
+              currentLocation = position.coords.latitude, position.coords.longitude;
+              console.log(currentLocation.toString);
+            }
+          }
+        })
+        
+
+        function getReverseGeocodingData(lat, lng) {
+          var latlng = new google.maps.LatLng(lat, lng);
+          // This is making the Geocode request
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+              if (status !== google.maps.GeocoderStatus.OK) {
+                  alert(status);
+              }
+              // This is checking to see if the Geoeode Status is OK before proceeding
+              if (status == google.maps.GeocoderStatus.OK) {
+                  console.log(results);
+                  var address = (results[0].formatted_address);
+              }
+          });
+      }
       
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
