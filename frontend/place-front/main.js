@@ -9,15 +9,7 @@ var nearbyText = Handlebars.compile(nearbyTemp);
 var currentTemp = $('.currentTemp').html();
 var currentText = Handlebars.compile(currentTemp);
 
-var arr=[
-  {key1:'value1', open:{
-    now: false
-  }},
-  {key2:'value2'}
-];
-console.log(arr[0].open.now);
-
-      function initMap() {
+    function initMap() {
         var home = new google.maps.LatLng(-33.919815,18.421095);
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -29,7 +21,7 @@ console.log(arr[0].open.now);
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location: home,
-          radius: 200,
+          radius: 400,
           type: ['restaurant']
         }, callback);
         
@@ -100,18 +92,25 @@ console.log(arr[0].open.now);
         }
 
         var getRating = $(function (rate) {
-          nearbyLoc.forEach(rating => {
-            $("#rateYo").rateYo({
-              rating: nearbyLoc.rating,
+          nearbyLoc.forEach((item, index) => {
+            $("#rateYo"+index).rateYo({
+              rating: item.rating,
               readOnly: true,
               starWidth: "24px"
             });
-            var rate = document.createElement('div').setAttribute('id', 'rateYo');
+            // var rate = document.createElement('div').setAttribute('id', 'rateYo' + index);
+            // rateThis.push(rate)
           })
         });
           
+
+        nearbyLoc.forEach(opening_hours => {
+          console.log(opening_hours.opening_hours);
+        });
+
+
+
         console.log(nearbyLoc); 
-        console.log(nearbyLoc[3].opening_hours.open_now);
         
         $('.collection').html(nearbyText({
           nearbyLoc: nearbyLoc,
@@ -128,41 +127,54 @@ console.log(arr[0].open.now);
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent("I/O Digital");
+          infowindow.setContent(currentLoc[0].name);
           infowindow.open(map, this);
         });
         
       }
+
 $(document).ready(function(){
 
-    // $.ajax({
-    //   headers: { "Accept": "application/json" },
-    //   type: "GET",
-    //   url: "http://localhost:3000/api/myPlace",
-    //   dataType: "json",
-    //   success: function (results) {
-    //     console.log(results);
-    //     results.forEach(function (item, index) {
-    //         results: results
-    //     })
-    //   }
-    // });
+    $.ajax({
+      headers: { "Accept": "application/json" },
+      type: "GET",
+      url: "http://167.99.40.78:9090/api/myPlace",
+      dataType: "json",
+      success: function (results) {
+        console.log("------------");
+        
+        console.log(results);
+        console.log("---------------");
+        
+        results.forEach(function (item, index) {
+            results: results
+        })
+      }
+    });
 
 
 
-    // $.ajax({
-    //   headers: { "Accept": "application/json" },
-    //   type: "GET",
-    //   url: "http://localhost:3000/api/places",
-    //   dataType: "json",
-    //   success: function (results) {
-    //     console.log(results);
-    //     results.forEach(function (item, index) {
-    //       $('.collection').html(nearbyText({
-    //         results: results
-    //       }));
-    //     })
-    //   }
-    // });
+    $.ajax({
+      headers: { "Accept": "application/json" },
+      type: "GET",
+      url: "http://167.99.40.78:9090/api/places",
+      dataType: "json",
+      success: function (results) {
+        console.log("-----------------");
+        
+        console.log(results);
+        console.log("-----------------");
+        
+        results.forEach(function (item, index) {
+          $('.collection').html(nearbyText({
+            results: results
+          }));
+        })
+      }
+    });
+
+    Handlebars.registerHelper( 'placeRating', function(index) {
+      return "rateYo" + index;
+  });
 
 });
