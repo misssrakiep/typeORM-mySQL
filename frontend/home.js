@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:9090";
+const API_URL = "http://167.99.40.78:9090";
 
 $(document).ready(function () {
     $('.modal').modal();

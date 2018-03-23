@@ -1,7 +1,9 @@
+const API_URL = "http://167.99.40.78:9090";
 var map;
 var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
+
 
 $("#back_home").click(function(){
   document.getElementById("home-page").style.display = "block";
