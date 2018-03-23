@@ -1,10 +1,10 @@
 .indeterminate {
     display: none;
 }
-.home {
-    background-color: rgba(255, 255, 255, 0.527);
-    background: blur(10px);
+.places-page{
+    display: none
 }
-body {
-    background: grey;
+#home-img{
+    height: 40%;
+    width: 40%;
 }
