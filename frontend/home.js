@@ -1,12 +1,13 @@
-const API_URL = "http://localhost:9090";
+const API_URL = "http://167.99.40.78:9090";
 
 $(document).ready(function () {
     $('.modal').modal();
 
-    $(document).ready(function(){
-        $('.tooltipped').tooltip();
-      });
-      
+    $('.tooltipped').tooltip();
+
+    $("#homeBtn").click(function() {
+        document.getElementById("home-page").style.display = "block";
+    })
     function initMap() {
         var mapProp = {
             center: new google.maps.LatLng(51.508742, -0.120850),
@@ -43,24 +44,13 @@ $(document).ready(function () {
 
                                 var result = results[0];
 
-                                    myPlace.address = result.formatted_address;
-                                    myPlace.type = result.types;
-                                    myPlace.lat = currentLocation.lat;
-                                    myPlace.lng = currentLocation.lng;
-                                    myPlace.place_id = result.place_id;
+                                myPlace.address = result.formatted_address;
+                                myPlace.type = result.types;
+                                myPlace.lat = currentLocation.lat;
+                                myPlace.lng = currentLocation.lng;
+                                myPlace.place_id = result.place_id;
 
                                 console.log(myPlace);
-
-                                // $.ajax({
-                                //     headers: { "Content-Type": "application/json" },
-                                //     type: "POST",
-                                //     url: API_URL + "/api/myPlace",
-                                //     dataType: "json",
-                                //     data: JSON.stringify(myPlace),
-                                //     success: function (results) {
-                                //         console.log("call made: ", results);
-                                //     }
-                                // })
 
                                 $(".myLocation").html(currentLocationText({
                                     address: myPlace.address,
@@ -80,21 +70,21 @@ $(document).ready(function () {
 
     $("#placeAdd").click(function () {
         var placeName = $("#placeName").val();
-        myPlace.placeName = placeName; 
+        myPlace.placeName = placeName;
         console.log(myPlace);
-         
-        if (placeName.length>0){
-          $.ajax({
-              headers: { "Content-Type" : "application/json" },
-              type: "POST",
-              url: API_URL + "/api/myPlace",
-              dataType: "json",
-              data: JSON.stringify(myPlace),
-              success: function (results) {
-                  console.log("call made: ", results);
-                  location.reload();
-              }
-          })
+
+        if (placeName.length > 0) {
+            $.ajax({
+                headers: { "Content-Type": "application/json" },
+                type: "POST",
+                url: API_URL + "/api/myPlace",
+                dataType: "json",
+                data: JSON.stringify(myPlace),
+                success: function (results) {
+                    console.log("call made: ", results);
+                    location.reload();
+                }
+            })
         }
 
     });

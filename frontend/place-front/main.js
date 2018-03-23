@@ -3,9 +3,11 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 
+
 $("#back_home").click(function(){
   document.getElementById("home-page").style.display = "block";
   document.querySelector(".places-page").style.display = "none";
+  currentLoc = [];
 });
 
 
