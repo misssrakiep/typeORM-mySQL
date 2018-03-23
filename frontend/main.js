@@ -1,4 +1,5 @@
 var map;
+var placeMap
 var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
@@ -73,23 +74,73 @@ function getPlace(id) {
               // location.reload();
               placeForReview = results;
               console.log(placeForReview)
+
+              if(placeForReview){
+                console.log("THIS LOGIC IS HAPPENING");
+                
+                document.getElementById("home-page").style.display = "none";
+                document.querySelector(".places-page").style.display = "none";
+                document.getElementById("placePage").style.display = "block";
+              }
+
             }
           })
 
         } else {
-          placeForReview = nearbyLoc
-          console.log(placeForReview)
+          //nearbyLoc is an array. filter and get correct element
+          const reviewResult = nearbyLoc.filter(item => item.place_id === id);
+          const placeRevItem = reviewResult[0]
+          placeForReview = placeRevItem
+          console.log("THIS IS PLACE FOR REVIEW", placeForReview);
+
+          if(placeForReview){
+            console.log("THIS LOGIC IS HAPPENING");
+            
+            document.getElementById("home-page").style.display = "none";
+            document.querySelector(".places-page").style.display = "none";
+            document.getElementById("placePage").style.display = "block";
+            initialize()
+            makeMarker(placeForReview)
+           
+          }
         }
       }
     });
-    console.log("THIS IS PLACE FOR REVIEW", placeForReview);
-    
-    if(placeForReview){
-      document.getElementById("home-page").style.display = "none";
-      document.querySelector(".places-page").style.display = "none";
-      document.getElementById("placePage").style.display = "block";
-    }
   }
+}
+
+function initialize() {
+  var lat = 0
+  var lng = 0
+  if(placeForReview && placeForReview.geometry && placeForReview.geometry.location) {
+    lat = placeForReview.geometry.location.lat()
+    lng = placeForReview.geometry.location.lng()
+  }
+
+  center = new google.maps.LatLng(lat, lng);
+  map = new google.maps.Map(document.getElementById('placeMap'), {
+    center: center,
+    zoom: 15
+  });
+  
+  // infoWindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+
+
+}
+function makeMarker(place) {
+  // var placeLoc = place.geometry.location;
+  var lat = 0
+  var lng = 0
+  if(placeForReview && placeForReview.geometry && placeForReview.geometry.location) {
+    lat = placeForReview.geometry.location.lat()
+    lng = placeForReview.geometry.location.lng()
+  }
+  var marker = new google.maps.Marker({
+    map: map,
+    position: new google.maps.LatLng(lat, lng),
+    animation: google.maps.Animation.DROP
+  });
 }
 
 
