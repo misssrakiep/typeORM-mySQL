@@ -21,13 +21,15 @@ var placeDetails = {};
 
 
 $("#collection").click(function (evt){
+  document.querySelector(".places-page").style.display = "none";
+  document.getElementById("placePage").style.display = "block";
   var thisID = evt.target.value;
 for (var i=0; i<nearbyLoc.length; i++){
   var element = nearbyLoc[i];
   if (thisID === element.place_id){
     placeDetailElement.push(element);
     console.log(placeDetailElement);
-    
+
   }
 }  
 })

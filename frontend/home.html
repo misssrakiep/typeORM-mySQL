@@ -132,7 +132,7 @@
   </div>
   <!-- ----------------------------------------------- -->
 
-<div id = "placePage" >
+<div id="placePage" >
     <br>
   <div class="container">
     <div class="col s12 m12">
@@ -154,59 +154,58 @@
       <img src="{{image}}" alt="image" </li>
       </ul>
     </script>
-  </div>
-
-  <script type="text/handlebars-x" class="reviewsTemp">
-    {{#if results}} {{#each results}}
-    <div class="reviewDetails collection row">
-      <div class="collection-item col s6 m6">
-      <ul class="collection">
-      <li class="collection-item">
-      <p><span>{{this.user.name}}.</span> {{this.rating}}</p>
-     <p>{{this.review}}</p>
-        </li>
+    
+    <script type="text/handlebars-x" class="reviewsTemp">
+      {{#if results}} {{#each results}}
+      <div class="reviewDetails collection row">
+        <div class="collection-item col s6 m6">
+          <ul class="collection">
+            <li class="collection-item">
+              <p><span>{{this.user.name}}.</span> {{this.rating}}</p>
+              <p>{{this.review}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {{/each}} {{/if}
+    </script>
+    <div class="container">
+      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
+        <i class="material-icons">add</i>
+      </a>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <ul class="collection">
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="user_name" type="text" class="validate">
+              <label for="user_name">First Name</label>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <p>Rate:</p>
+              <div id="rateYo" class="rating"></div>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">mode_edit</i>
+              <textarea id="review" class="materialize-textarea"></textarea>
+              <label for="review">Review</label>
+            </div>
+          </li>
         </ul>
       </div>
-    </div>
-    {{/each}} {{/if}
-  </script>
-  <div class="container">
-  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
-    <i class="material-icons">add</i>
-  </a>
-</div>
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <ul class="collection">
-        <li class="collection-item">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="user_name" type="text" class="validate">
-            <label for="user_name">First Name</label>
-          </div>
-        </li>
-        <li class="collection-item">
-          <div class="input-field col s6">
-            <p>Rate:</p>
-            <div id="rateYo" class="rating"></div>
-          </div>
-        </li>
-        <li class="collection-item">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">mode_edit</i>
-            <textarea id="review" class="materialize-textarea"></textarea>
-            <label for="review">Review</label>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button id="submitReview" class="modal-action modal-close waves-effect waves-green btn-flat">add</button>
+      <div class="modal-footer">
+        <button id="submitReview" class="modal-action modal-close waves-effect waves-green btn-flat">add</button>
+      </div>
     </div>
   </div>
-</div>
-
+    
 </body>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -216,6 +215,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 <script src="home.js"></script>
-<script src="place-front/main.js"></script>
-
+<script src="main.js"></script>
 </html>
