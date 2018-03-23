@@ -3,11 +3,11 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 
+var placeDetailElement = []
 
 $("#back_home").click(function(){
   document.getElementById("home-page").style.display = "block";
   document.querySelector(".places-page").style.display = "none";
-  currentLoc = [];
 });
 
 
@@ -17,6 +17,20 @@ var nearbyText = Handlebars.compile(nearbyTemp);
 // var currentTemp = $(".currentTemp").html();
 // var currentText = Handlebars.compile(currentTemp);
 var placeDetails = {};
+
+
+
+$("#collection").click(function (evt){
+  var thisID = evt.target.value;
+for (var i=0; i<nearbyLoc.length; i++){
+  var element = nearbyLoc[i];
+  if (thisID === element.place_id){
+    placeDetailElement.push(element);
+    console.log(placeDetailElement);
+    
+  }
+}  
+})
 
 var placeLocation = {};
 $(".myPlaces").click(function (event) {
