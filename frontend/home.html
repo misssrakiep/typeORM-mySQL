@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,45 +9,34 @@
   <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo right">Logo</a>
+          <a class="tooltipped btn-large" data-position="top" data-tooltip="Home"><i class="material-icons left">home</i></a>
+          <a class="tooltipped btn-large"  data-position="top" data-tooltip="Nearby Places"><i class="material-icons left">location_on</i></a>
+          <a class="tooltipped btn-large"  data-position="top" data-tooltip="Place Details"><i class="material-icons left">details</i></a>
+        </div>
+      </nav>
   <div class="container" id="home-page">
     <div class="home center-align z-depth-5">
       <div id="homePic" class="circle">
-        <img src="http://icons.iconarchive.com/icons/fps.hu/free-christmas-flat-circle/512/home-icon.png" alt="">
+          <img id="home-img" src="img/See. Locate. Connect.png" alt="">
         <div id="googleMap"></div>
       </div>
-      <button id="findLoc" class="btn-large">find my location</button>
 
 
-      <br>
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>
-      <div class="myLocation">
-        <script type="text/handlebars-x" class="currentLocationTemp">
-          <ul class="collection">
-          {{#if address}}
-          <li class="collection-item avatar">
-              <i class="material-icons circle">home</i>
-              <span class="title">Current location</span>
-              <p><b>{{address}}</b><br>
-            {{type}}<br>
-            {{place_id}}</p>
-            <a class="secondary-content"><button id="placeBtn" value="{{this.place_id}}"><i class="material-icons">add_location</i> find nearby places</button></a>
-          </li>
-          {{/if}}
-          </ul>
-          </script>
-      </div>
+
+
       <div class="myPlaces">
         <script type="text/handlebars-x" class="myPlacesTemp">
     <ul class="collection">
+      <li class="collection-header"><h4>Where will you be today?</h4></li>
       {{#each results}}
         <li class="collection-item avatar">
-            <i class="material-icons circle">location_on</i>
+            <i class="material-icons circle red">location_on</i>
             <span class="title">{{this.placeName}}</span>
           <p>{{this.address}}</p>
           <button id="findBtn" value="{{this.id}}" class="btn-small waves-effect waves-light orange right">find nearby places</button>
@@ -63,18 +51,36 @@
   </script>
       </div>
     </div>
+
     <div data-target="modal1" class="fixed-action-btn modal-trigger">
-      <a class="btn-floating btn-large waves-effect waves-light red">
+      <a class="btn-floating tooltipped btn-large waves-effect waves-light red" data-position="top" data-tooltip="Click to add your current location">
         <i class="material-icons">add</i>
       </a>
     </div>
     <div id="modal1" class="modal bottom-sheet">
       <div class="modal-content">
         <h4>Where art thou today?</h4>
-        <input type="radio" value="">
+      <button id="findLoc" class="btn-small waves-effect waves-light">find my location</button>   
+      <br>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>     
         <input type="text" name="placeName" id="placeName" placeholder="Name your current place">
-        <input type="text" name="website" id="website" placeholder="Does this place have a website?">
-
+        <div class="myLocation">
+          <script type="text/handlebars-x" class="currentLocationTemp">
+            <ul class="collection">
+            {{#if address}}
+            <li class="collection-item avatar">
+                <i class="material-icons circle">home</i>
+                <span class="title">Current location</span>
+                <p><b>{{address}}</b><br>
+              {{type}}<br>
+              {{place_id}}</p>
+            </li>
+            {{/if}}
+            </ul>
+            </script>
+        </div>
       </div>
       <div class="modal-footer">
         <a href="#!" id="placeAdd" class="modal-action modal-close waves-effect waves-green btn-flat">Save my location</a>
