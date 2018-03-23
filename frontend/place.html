@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="place.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxl1wK2CnB9hXlU3eGp-VRPJn28Ml3nI&libraries=places"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+</head>
+
+<body>
+  <br>
+  <div class="container">
+    <div class="col s12 m12">
+      <div id="map" class="container" style="width:100%; height:300.59px"></div>
+    </div>
+  </div>
+  <br>
+  <div id="placeDetails" class="container col s12 m12"></div>
+
+  <script type="text/handlebars-x" class="placeDetailsTemp">
+  <ul class="collection">
+      <li class="collection-item avatar">
+          <i class="material-icons circle">location_on</i>
+          <span class="title">{{this.name}}</span>
+        <p>{{this.types}}<br>
+          {{this.rating}}<br>
+        {{this.address}} <br>
+      {{this.open_hours}}</p>
+      <img src="{{image}}" alt="image" </li>
+      </ul>
+    </script>
+  </div>
+
+  <script type="text/handlebars-x" class="reviewsTemp">
+    {{#if results}} {{#each results}}
+    <div class="reviewDetails collection row">
+      <div class="collection-item col s6 m6">
+      <ul class="collection">
+      <li class="collection-item">
+      <p><span>{{this.user.name}}.</span> {{this.rating}}</p>
+     <p>{{this.review}}</p>
+        </li>
+        </ul>
+      </div>
+    </div>
+    {{/each}} {{/if}
+  </script>
+  <div class="container">
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
+    <i class="material-icons">add</i>
+  </a>
+</div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <ul class="collection">
+        <li class="collection-item">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="user_name" type="text" class="validate">
+            <label for="user_name">First Name</label>
+          </div>
+        </li>
+        <li class="collection-item">
+          <div class="input-field col s6">
+            <p>Rate:</p>
+            <div id="rateYo" class="rating"></div>
+          </div>
+        </li>
+        <li class="collection-item">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="review" class="materialize-textarea"></textarea>
+            <label for="review">Review</label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button id="submitReview" class="modal-action modal-close waves-effect waves-green btn-flat">add</button>
+    </div>
+  </div>
+  <!--Import jQuery before materialize.js-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+  <script src="place.js"></script>
+</body>
+
+</html>

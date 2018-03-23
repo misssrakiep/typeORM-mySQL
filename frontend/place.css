@@ -15,6 +15,6 @@ body {
   width: 50%;
   height: 100%;
 }
-li {
-  width: 50%
+#placePage {
+  display: none;
 }
