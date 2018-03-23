@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,23 +13,21 @@
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo right">Logo</a>
-          <a class="tooltipped btn-large" data-position="top" data-tooltip="Home"><i class="material-icons left">home</i></a>
-          <a class="tooltipped btn-large"  data-position="top" data-tooltip="Nearby Places"><i class="material-icons left">location_on</i></a>
-          <a class="tooltipped btn-large"  data-position="top" data-tooltip="Place Details"><i class="material-icons left">details</i></a>
-        </div>
-      </nav>
+  <nav>
+    <div class="nav-wrapper grey">
+      <a href="#" class="brand-logo right">
+        <img src="img/innogy-logo.png" style="height:50px" alt="">
+        <img src="img/Googlemapslogo2014.png" style="height:50px"alt="">
+      </a>
+      <a id="homeBtn" class="btn orange">home</a>
+    </div>
+  </nav>
   <div class="container" id="home-page">
     <div class="home center-align z-depth-5">
       <div id="homePic" class="circle">
-          <img id="home-img" src="img/See. Locate. Connect.png" alt="">
+        <img id="home-img" src="img/See. Locate. Connect.png" alt="">
         <div id="googleMap"></div>
       </div>
-
-
-
 
       <div class="myPlaces">
         <script type="text/handlebars-x" class="myPlacesTemp">
@@ -60,11 +59,11 @@
     <div id="modal1" class="modal bottom-sheet">
       <div class="modal-content">
         <h4>Where art thou today?</h4>
-      <button id="findLoc" class="btn-small waves-effect waves-light">find my location</button>   
-      <br>
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>     
+        <button id="findLoc" class="btn-small waves-effect waves-light">find my location</button>
+        <br>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
         <input type="text" name="placeName" id="placeName" placeholder="Name your current place">
         <div class="myLocation">
           <script type="text/handlebars-x" class="currentLocationTemp">
@@ -144,6 +143,13 @@
       </a>
     </div>
   </div>
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        
+      </div>
+    </div>
+  </footer>
 </body>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
