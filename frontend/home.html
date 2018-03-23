@@ -7,6 +7,7 @@
   <title>Home</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -88,25 +89,10 @@
     </div>
   </div>
   <!-- ....................................................... -->
+  <br>
   <div class="places-page">
     <div class="row col s12">
-      <div class="col s6 m6">
-        <div class="card small blue-grey lighten-4">
-          <div class="currentLoc">
-            <script type="text/handlebars-x" class="currentTemp">
-              
-          <div class="card-content">
-            {{#currentLoc}}
-            <span class="card-title"><h4>{{this.name}}:</h4></span>
-            <p>{{this.address}}</p>
-            {{/currentLoc}}
-          </div>
-          
-        </script>
-          </div>
-        </div>
-      </div>
-      <div id="map" class="col s6 m6" style="width:50%;height:300px;"></div>
+      <div id="map" class="col s6 m6" style="width:100%;height:400px;"></div>
     </div>
 
     <br>
@@ -147,6 +133,7 @@
 </body>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>

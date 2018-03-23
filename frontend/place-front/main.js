@@ -12,8 +12,8 @@ $("#back_home").click(function(){
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
 
-var currentTemp = $(".currentTemp").html();
-var currentText = Handlebars.compile(currentTemp);
+// var currentTemp = $(".currentTemp").html();
+// var currentText = Handlebars.compile(currentTemp);
 var placeDetails = {};
 
 var placeLocation = {};
@@ -62,9 +62,9 @@ $(".myPlaces").click(function (event) {
 
         console.log(currentLoc);
 
-        $(".currentLoc").html(currentText({
-          currentLoc: currentLoc
-        }))
+        // $(".currentLoc").html(currentText({
+        //   currentLoc: currentLoc
+        // }))
         console.log(currentLoc);
 
       }
@@ -114,11 +114,18 @@ function createMarker(place) {
   // var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
-    position: new google.maps.LatLng(-33.919815, 18.421095)
+    position: new google.maps.LatLng(-33.919815, 18.421095),
+    animation: google.maps.Animation.DROP
   });
 
+  var contentString = '<div class="placeContent">' +
+                      '<strong><p align="center">' + currentLoc[0].name + '<br>' + currentLoc[0].address +
+                      '</p></strong>' + '</div>';
+
+    
+
   google.maps.event.addListener(marker, 'click', function () {
-    infowindow.setContent(currentLoc[0].name);
+    infowindow.setContent(contentString);
     infowindow.open(map, this);
   });
 
