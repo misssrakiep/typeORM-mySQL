@@ -98,31 +98,29 @@
     <br>
     <form>
       <div class="input-field">
-        <input id="search" type="search" class="lime-text" required>
-        <label for="search">
+        <input id="searchPlace" type="search" class="lime-text" required>
+        <label for="searchPlace">
           <i class="material-icons lime-text">search</i>
         </label>
         <i class="material-icons">close</i>
       </div>
     </form>
     <br>
-    <ul class="collection">
-      <div id="collection">
-        <script type="text/handlebars-x" class="nearbyTemp">
-              {{#each nearbyLoc as |item index|}}
-              <li class="collection-item avatar">
-                <i class="material-icons circle red">place</i>
-                <span class="title">{{this.name}}</span>
-                <p>{{this.vicinity}} <br>
-                  
-                  <label for"{{placeRating index}}">Rating:{{this.rating}}<div id="{{placeRating index}}"></div></label>
-                  Type: {{this.types }}
-              </p>
-              <button href="#" id="placeDetails" value="{{this.place_id}}" class="secondary-content"><i class="material-icons">arrow_forward</i></button>
-            </li>
-              {{/each}}
-             </script>
-      </div>
+    <ul id='collection' class="collection">
+      <script type="text/handlebars-x" class="nearbyTemp">
+        {{#each nearbyLoc as |item index|}}
+        <li class="collection-item avatar">
+          <i class="material-icons circle red">place</i>
+          <span class="title">{{this.name}}</span>
+          <p>{{this.vicinity}} <br>
+            
+            <label for"{{placeRating index}}">Rating:{{this.rating}}<div id="{{placeRating index}}"></div></label>
+            Type: {{this.types }}
+        </p>
+        <button href="#" onclick="getPlace('{{this.place_id}}')" class="secondary-content"><i class="material-icons">arrow_forward</i></button>
+      </li>
+        {{/each}}
+       </script>
     </ul>
     <div id="back_home" class="fixed-action-btn">
       <a class="btn-floating btn-large waves-effect waves-light blue">

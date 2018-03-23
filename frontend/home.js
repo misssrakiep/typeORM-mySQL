@@ -7,6 +7,8 @@ $(document).ready(function () {
 
     $("#homeBtn").click(function() {
         document.getElementById("home-page").style.display = "block";
+        document.querySelector(".places-page").style.display = "none";
+        document.getElementById("placePage").style.display = "none";
     })
     function initMap() {
         var mapProp = {

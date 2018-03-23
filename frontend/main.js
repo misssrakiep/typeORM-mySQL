@@ -3,36 +3,95 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 
-var placeDetailElement = []
+var placeDetailElement = [];
 
-$("#back_home").click(function(){
+
+$("#back_home").click(function () {
   document.getElementById("home-page").style.display = "block";
   document.querySelector(".places-page").style.display = "none";
+  document.getElementById("placePage").style.display = "none";
 });
 
 
 var nearbyTemp = $('.nearbyTemp').html();
 var nearbyText = Handlebars.compile(nearbyTemp);
 
-// var currentTemp = $(".currentTemp").html();
-// var currentText = Handlebars.compile(currentTemp);
+
 var placeDetails = {};
 
+var placeForReview
 
+function getPlace(id) {
 
-$("#collection").click(function (evt){
-  document.querySelector(".places-page").style.display = "none";
-  document.getElementById("placePage").style.display = "block";
-  var thisID = evt.target.value;
-for (var i=0; i<nearbyLoc.length; i++){
-  var element = nearbyLoc[i];
-  if (thisID === element.place_id){
-    placeDetailElement.push(element);
-    console.log(placeDetailElement);
+  if (id) {
+    $.ajax({
+      headers: {
+        "Accept": "application/json"
+      },
+      type: "GET",
+      url: API_URL + "/api/places",
+      dataType: "json",
+      success: function (results) {
+        let ins = false
 
+        for (let i = 0; i < results.length; i++) {
+          const element = results[i];
+          if (id === element.place_id) {
+            ins = false;
+            // console.log("hkjghadjkbkhb",element.place_id);
+          } else {
+            ins = true;
+            // console.log("there is nothing");
+          }
+        }
+        if (ins) {
+          const result = nearbyLoc.filter(item => item.place_id === id);
+          const placeItem = result[0]
+          const lat = placeItem.geometry.location.lat();
+          const lng = placeItem.geometry.location.lng()
+          console.log(lat, lng);
+
+          var resultData = {
+            placeName: placeItem.name,
+            address: placeItem.vicinity,
+            type: result.types,
+            lat: lat,
+            lng: lng,
+            place_id: placeItem.place_id
+          }
+          console.log("This is the result:", result);
+          $.ajax({
+            headers: {
+              "Content-Type": "application/json"
+            },
+            type: "POST",
+            url: API_URL + "/api/myPlace",
+            dataType: "json",
+            data: JSON.stringify(resultData),
+            success: function (results) {
+              console.log("call made: ", results);
+              // location.reload();
+              placeForReview = results;
+              console.log(placeForReview)
+            }
+          })
+
+        } else {
+          placeForReview = nearbyLoc
+          console.log(placeForReview)
+        }
+      }
+    });
+    console.log("THIS IS PLACE FOR REVIEW", placeForReview);
+    
+    if(placeForReview){
+      document.getElementById("home-page").style.display = "none";
+      document.querySelector(".places-page").style.display = "none";
+      document.getElementById("placePage").style.display = "block";
+    }
   }
-}  
-})
+}
+
 
 var placeLocation = {};
 $(".myPlaces").click(function (event) {
@@ -40,7 +99,9 @@ $(".myPlaces").click(function (event) {
 
   var id = event.target.value;
   $.ajax({
-    headers: { "Accept": "application/json" },
+    headers: {
+      "Accept": "application/json"
+    },
     type: "GET",
     url: API_URL + "/api/places/" + id,
     dataType: "json",
@@ -76,6 +137,19 @@ $(".myPlaces").click(function (event) {
           type: ['restaurant']
         }, callback);
 
+        var input = document.getElementById('searchPlace');
+        var searchBox = new google.maps.places.SearchBox(input);
+
+        searchBox.addListener('places_changed', function () {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+          markers.forEach(function (marker) {
+
+          });
+        });
 
 
         console.log(currentLoc);
@@ -113,12 +187,6 @@ function callback(results, status) {
   });
 
 
-  // nearbyLoc.forEach(opening_hours => {
-  //   console.log(opening_hours.opening_hours);
-  // });
-
-
-
   console.log(nearbyLoc);
 
   $('#collection').html(nearbyText({
@@ -137,10 +205,10 @@ function createMarker(place) {
   });
 
   var contentString = '<div class="placeContent">' +
-                      '<strong><p align="center">' + currentLoc[0].name + '<br>' + currentLoc[0].address +
-                      '</p></strong>' + '</div>';
+    '<strong><p align="center">' + currentLoc[0].name + '<br>' + currentLoc[0].address +
+    '</p></strong>' + '</div>';
 
-    
+
 
   google.maps.event.addListener(marker, 'click', function () {
     infowindow.setContent(contentString);
