@@ -120,14 +120,14 @@ $(document).ready(function () {
       review: review,
     };
     console.log(reviewPost);
-    $.ajax({
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      type: "POST",
-      url: "http://167.99.40.78:9090/api/places/"+ id + "/postReviews",
-      data: JSON.stringify(reviewPost),
-      success: function (results) {
-        console.log("this is the posted data", results);
-      }
-    });
+    // $.ajax({
+    //   headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    //   type: "POST",
+    //   url: "http://167.99.40.78:9090/api/places/"+ id + "/postReviews",
+    //   data: JSON.stringify(reviewPost),
+    //   success: function (results) {
+    //     console.log("this is the posted data", results);
+    //   }
+    // });
   })
 })
