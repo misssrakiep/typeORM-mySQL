@@ -5,6 +5,10 @@ var currentLoc = [];
 var nearbyLoc = [];
 var placeDetailElement = [];
 
+$(document).ready(function () {
+  $('.modal').modal();
+  $('.collapsible').collapsible();
+});
 
 $("#back_home").click(function () {
   document.getElementById("home-page").style.display = "block";
