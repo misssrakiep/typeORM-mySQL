@@ -19,46 +19,38 @@
     <div class="nav-wrapper grey">
       <a href="#" class="brand-logo right">
         <img src="img/innogy-logo.png" style="height:50px" alt="">
-        <img src="img/Googlemapslogo2014.png" style="height:50px"alt="">
       </a>
-      <a id="homeBtn" class="btn orange">home</a>
+      <a id="homeBtn" class="btn orange waves-effect hoverable">home</a>
     </div>
   </nav>
   <div class="container" id="home-page">
-    <div class="home center-align z-depth-5">
-      
-      
-      <button id="findLoc" class="btn-small waves-effect waves-light">find my location</button>
-      <button id="nearestPlaces" class="btn-small waves-effect waves-light">find nearest places</button>
-          <div class="progress">
-            <div class="indeterminate"></div>
+    <center>
+        <div id="home" class="z-depth-5 valign-wrapper">
+          <img id="home-img" src="img/See. Locate. Connect.png" alt="">
+          <button id="findLoc" class="btn-large waves-effect waves-light orange hoverable">find my location</button>
+          <br>
+              <div id="success" class="valign-wrapper">
+                  <strong><p id="successText"></p></strong>
+                </div>  
+                <br>       
+          <div id="preloader" class="preloader-wrapper active">
+            <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <div id="homePic" class="circle">
-        <img id="home-img" src="img/See. Locate. Connect.png" alt="">
-        <div id="googleMap"></div>
-      </div> -->
+          <br>
+          <button id="nearestPlaces" class="btn-large waves-effect waves-light">find nearby places</button>
+        </div>
+    </center>
     </div>
-  </div>
   <!-- ....................................................... -->
   <br>
   <div class="places-page">
@@ -101,17 +93,17 @@
   </div>
   <!-- ----------------------------------------------- -->
 
-<div id="placePage" >
+  <div id="placePage">
     <br>
-  <div class="container">
-    <div class="col s12 m12">
-      <div id="placeMap" class="container" style="width:100%; height:300.59px"></div>
+    <div class="container">
+      <div class="col s12 m12">
+        <div id="placeMap" class="container" style="width:100%; height:300.59px"></div>
+      </div>
     </div>
-  </div>
-  <br>
-  <div id="placeDetails" class="container col s12 m12"></div>
+    <br>
+    <div id="placeDetails" class="container col s12 m12"></div>
 
-  <script type="text/handlebars-x" class="placeDetailsTemp">
+    <script type="text/handlebars-x" class="placeDetailsTemp">
   <ul class="collection">
       <li class="collection-item avatar">
           <i class="material-icons circle">location_on</i>
@@ -123,7 +115,7 @@
       <img src="{{image}}" alt="image" </li>
       </ul>
     </script>
-    
+
     <script type="text/handlebars-x" class="reviewsTemp">
       {{#if results}} {{#each results}}
       <div class="reviewDetails collection row">
@@ -174,17 +166,18 @@
       </div>
     </div>
   </div>
-    
+
 </body>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQJ_sXBz0eIPT4l3pN7QsC_XYKG42JMcU&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxl1wK2CnB9hXlU3eGp-VRPJn28Ml3nI&libraries=places"
-async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxl1wK2CnB9hXlU3eGp-VRPJn28Ml3nI&libraries=places" async
+  defer></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 <script src="home.js"></script>
 <script src="main.js"></script>
+
 </html>

@@ -25,8 +25,7 @@ $("#findLoc").click(function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (pos) {
         if (pos) {
-          document.querySelector("#success").style.display = "block";
-          document.getElementById("successText").innerHTML = "Location found"
+          document.querySelector(".success").style.display = "block";
           console.log(currentLocation);
           currentLocation.lat = pos.coords.latitude;
           currentLocation.lng = pos.coords.longitude;
@@ -50,11 +49,6 @@ $("#findLoc").click(function () {
             }
 
           })
-        }
-        if(!pos){
-          document.getElementById("successText").innerHTML = "Location not found"; 
-          document.getElementById("success").style.background = "rgba(255, 0, 0, 0.336)";
-          document.getElementById("success").style.border = "red";        
         }
 
       })

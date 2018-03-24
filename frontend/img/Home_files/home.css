@@ -14,8 +14,9 @@
     display: none;
 }
 #home {
-    width: 60%;
     display: block;
+    width: 60%;
+    max-width: 100%;
     margin-top: 10px;
     height: 80%;
 }
@@ -28,18 +29,9 @@
 #findLoc {
     margin-bottom: 20px;
 }
-#success {
+.success {
     display: none;
     background-color: #ddffdd;
     border-left: 6px solid #4CAF50;
     height: 40px;
-}
-
-@media only screen and (max-width: 600px) {
-    /* For mobile phones: */
-    #home {
-        width: 100%;
-        display: block;
-        margin-top: 10px;
-    }
 }

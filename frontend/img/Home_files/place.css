@@ -1,0 +1,17 @@
+#placeDetailsPane {
+  background-color: #ffffff71;
+  background: blur(10px);
+  border: 3px solid white;
+}
+.reviewDetails {
+  overflow: auto;
+  display: inline-block
+}
+.img {
+  float: right;
+  width: 50%;
+  height: 100%;
+}
+#placePage {
+  display: none;
+}
