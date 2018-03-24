@@ -1,9 +1,8 @@
 var map;
-var placeMap
+var placeMap;
 var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
-
 var placeDetailElement = [];
 
 
@@ -12,6 +11,49 @@ $("#back_home").click(function () {
   document.querySelector(".places-page").style.display = "none";
   document.getElementById("placePage").style.display = "none";
 });
+
+
+//shameera
+//finding current location to go to nearby places
+var currentLocation = {};
+var myPlace = {};
+$("#findLoc").click(function () {
+  currentLoc = {};
+    document.querySelector(".indeterminate").style.display = "block";
+    getLocation();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                if (pos) {
+                    console.log(currentLocation);
+                    currentLocation.lat = pos.coords.latitude;
+                    currentLocation.lng = pos.coords.longitude;
+                    document.querySelector(".indeterminate").style.display = "none";
+                    console.log(pos.coords);
+                    geocoder = new google.maps.Geocoder();
+                    var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+
+                            var result = results[0];
+
+                            myPlace.address = result.formatted_address;
+                            myPlace.type = result.types;
+                            myPlace.lat = currentLocation.lat;
+                            myPlace.lng = currentLocation.lng;
+                            myPlace.place_id = result.place_id;
+
+                            console.log(myPlace);
+                        }
+
+                    })
+                }
+
+            })
+        }
+    }
+});
+
 
 
 var nearbyTemp = $('.nearbyTemp').html();
@@ -128,6 +170,9 @@ function initialize() {
 
 
 }
+
+
+
 function makeMarker(place) {
   // var placeLoc = place.geometry.location;
   var lat = 0
@@ -143,38 +188,18 @@ function makeMarker(place) {
   });
 }
 
-
-var placeLocation = {};
-$(".myPlaces").click(function (event) {
-  console.log("click");
-
-  var id = event.target.value;
-  $.ajax({
-    headers: {
-      "Accept": "application/json"
-    },
-    type: "GET",
-    url: API_URL + "/api/places/" + id,
-    dataType: "json",
-    success: function (results) {
-      console.log("one", results);
-      placeDetails.lat = results.lat;
-      placeDetails.lng = results.lng;
-      placeDetails.placeName = results.placeName;
-      placeDetails.address = results.address;
-      placeDetails.place_id = results.place_id;
-      console.log(placeDetails.lat, placeDetails.lng);
-      document.getElementById("home-page").style.display = "none";
-      document.querySelector(".places-page").style.display = "block";
-      currentLoc.push({
-        name: placeDetails.placeName,
-        address: placeDetails.address
-      });
+//shameera
+//takes current location to pinpoint on map
+//going to nearby places
+//button on initial screen
+$("#nearestPlaces").click(function () {
+document.getElementById("home-page").style.display = "none";
+document.querySelector(".places-page").style.display = "block";
       initMap();
 
 
       function initMap() {
-        var home = new google.maps.LatLng(placeDetails.lat, placeDetails.lng);
+        var home = new google.maps.LatLng(myPlace.lat, myPlace.lng);
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: home,
@@ -193,28 +218,16 @@ $(".myPlaces").click(function (event) {
 
         searchBox.addListener('places_changed', function () {
           var places = searchBox.getPlaces();
-
           if (places.length == 0) {
             return;
           }
           markers.forEach(function (marker) {
-
           });
         });
 
-
-        console.log(currentLoc);
-
-        // $(".currentLoc").html(currentText({
-        //   currentLoc: currentLoc
-        // }))
-        console.log(currentLoc);
-
       }
+    })
 
-    }
-  });
-})
 
 
 function callback(results, status) {
@@ -256,7 +269,7 @@ function createMarker(place) {
   });
 
   var contentString = '<div class="placeContent">' +
-    '<strong><p align="center">' + currentLoc[0].name + '<br>' + currentLoc[0].address +
+    '<strong><p align="center">' +  myPlace.address +
     '</p></strong>' + '</div>';
 
 
