@@ -7,10 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Out&About App</title>
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/map-icon.png">
 </head>
 
 <body>
@@ -24,32 +25,34 @@
   </nav>
   <div class="container" id="home-page">
     <center>
-        <div id="home" class="z-depth-5 valign-wrapper">
-          <img id="home-img" src="img/See. Locate. Connect.png" alt="">
-          <button id="findLoc" class="btn-large waves-effect waves-light orange hoverable">find my location</button>
-          <br>
-              <div id="success" class="valign-wrapper">
-                  <strong><p id="successText"></p></strong>
-                </div>  
-                <br>       
-          <div id="preloader" class="preloader-wrapper active">
-            <div class="spinner-layer spinner-red-only">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div>
-              <div class="gap-patch">
-                <div class="circle"></div>
-              </div>
-              <div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
+      <div id="home" class="z-depth-5 valign-wrapper">
+        <img id="home-img" src="img/See. Locate. Connect.png" alt="">
+        <button id="findLoc" class="btn-large waves-effect waves-light orange hoverable">find my location</button>
+        <br>
+        <div id="success" class="valign-wrapper">
+          <strong>
+            <p id="successText"></p>
+          </strong>
+        </div>
+        <br>
+        <div id="preloader" class="preloader-wrapper active">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
             </div>
           </div>
-          <br>
-          <button id="nearestPlaces" class="btn-large waves-effect waves-light">find nearby places</button>
         </div>
+        <br>
+        <button id="nearestPlaces" class="btn-large waves-effect waves-light">find nearby places</button>
+      </div>
     </center>
-    </div>
+  </div>
   <!-- ....................................................... -->
   <br>
   <div class="places-page">
@@ -122,31 +125,33 @@
       </script>
       <div class="modal-footer">
         <h5 class="center"> Rate Place </h5>
-          <ul class="collection">
-              <li class="collection-item">
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">account_circle</i>
-                  <input id="user_name" type="text" class="validate">
-                  <label for="user_name">First Name</label>
-                </div>
-              </li>
-              <li class="collection-item">
-                <div class="input-field col s6">
-                  <p>Rate:</p>
-                  <div id="rateYo" class="rating"></div>
-                </div>
-              </li>
-              <li class="collection-item">
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">mode_edit</i>
-                  <textarea id="review" class="materialize-textarea"></textarea>
-                  <label for="review">Review</label>
-                </div>
-              </li>
-              <li>
-                  <a id="submitReview" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-              </li>
-            </ul>
+        <ul class="collection">
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="user_name" type="text" class="validate">
+              <label for="user_name">First Name</label>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <p>Rate:</p>
+              <div id="rateYo" class="rating"></div>
+            </div>
+          </li>
+          <li class="collection-item">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">mode_edit</i>
+              <textarea id="review" class="materialize-textarea"></textarea>
+              <label for="review">Review</label>
+            </div>
+          </li>
+          <li>
+            <a id="submitReview" class="btn-floating btn-large waves-effect waves-light red">
+              <i class="material-icons">add</i>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -162,7 +167,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-<script src="home.js"></script>
-<script src="main.js"></script>
+<script src="js/home.js"></script>
+<script src="js/main.js"></script>
 
 </html>

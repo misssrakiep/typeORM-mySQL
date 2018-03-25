@@ -1,0 +1,55 @@
+.header{
+    font-family: 'Questrial', sans-serif;
+}
+ .slogan{
+    font-family: 'Questrial', sans-serif;
+    font-size: 30px;
+    margin-top: -30px;
+ }
+ #navRow {
+     height: 70px;
+     position: fixed;
+     width: 100%;
+     background-color: white;
+ }
+ .homeScreen {
+    margin: 10px; 
+ }
+ #initial{
+     right: 0;
+ }
+ #locationIcon {
+     color: orange;
+     margin-left: 20px;
+     height: 50px;
+ }
+ .find {
+    font-family: 'Questrial', sans-serif;
+    font-size: 20px;
+ }
+ #scrollyBar{
+     overflow-y: auto;
+ }
+ #fullscreen {
+     padding-top: 90px;
+ }
+ #go{
+     margin-bottom: 20px;
+ }
+
+ .codex {
+     height: 40px;
+     align-content: right;
+margin-bottom: -13px;
+margin-left: 3px;
+ }
+#icons{
+    height: 40px;
+}
+ @media only screen and (max-width: 500px) {
+    /* For mobile phones: */
+    .homeScreen {
+        width: 100%;
+        margin-bottom: 10px;     
+     }
+}
