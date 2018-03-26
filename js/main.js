@@ -4,6 +4,7 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 var placeDetailElement = [];
+const API_URL = "http://167.99.40.78:9090";
 
 $(document).ready(function () {
   $('.modal').modal();
@@ -102,10 +103,8 @@ function getPlace(id) {
           const element = results[i];
           if (id === element.place_id) {
             ins = false;
-            // console.log("hkjghadjkbkhb",element.place_id);
           } else {
             ins = true;
-            // console.log("there is nothing");
           }
         }
         if (ins) {
