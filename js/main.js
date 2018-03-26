@@ -157,7 +157,7 @@ function getPlace(id) {
           console.log("THIS IS PLACE FOR REVIEW", placeForReview);
 
           if (placeForReview) {
-            console.log("THIS LOGIC IS HAPPENING", );
+            console.log("THIS LOGIC IS HAPPENING");
             $('#placeDetails').html(placeDetailsText({
               image: placeForReview.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }),
               name: placeForReview.name,
@@ -165,7 +165,7 @@ function getPlace(id) {
               address: placeForReview.vicinity,
               open_hours: placeForReview.opening_hours.open_now ? "OPEN NOW" : "CLOSED",
               types: placeForReview.types[0]
-            }))
+            }));
           }
         }
       }
