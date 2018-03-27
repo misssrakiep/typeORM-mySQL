@@ -4,6 +4,7 @@ var infowindow;
 var currentLoc = [];
 var nearbyLoc = [];
 var placeDetailElement = [];
+var reviews = [];
 const API_URL = "http://167.99.40.78:9090";
 
 $(document).ready(function () {
@@ -72,7 +73,7 @@ var nearbyText = Handlebars.compile(nearbyTemp);
 
 var placeDetails = {};
 
-var placeForReview
+var placeForReview;
 
 function getPlace(id) {
 
@@ -88,6 +89,7 @@ function getPlace(id) {
   var placeDetailsTemp = $('.placeDetailsTemp').html();
   var placeDetailsText = Handlebars.compile(placeDetailsTemp);
 
+
   if (id) {
     $.ajax({
       headers: {
@@ -97,7 +99,7 @@ function getPlace(id) {
       url: API_URL + "/api/places",
       dataType: "json",
       success: function (results) {
-        let ins = false
+        let ins = false;
 
         for (let i = 0; i < results.length; i++) {
           const element = results[i];
@@ -111,7 +113,7 @@ function getPlace(id) {
           const result = nearbyLoc.filter(item => item.place_id === id);
           const placeItem = result[0]
           const lat = placeItem.geometry.location.lat();
-          const lng = placeItem.geometry.location.lng()
+          const lng = placeItem.geometry.location.lng();
           console.log(lat, lng);
 
           var resultData = {
@@ -133,20 +135,21 @@ function getPlace(id) {
             data: JSON.stringify(resultData),
             success: function (results) {
               console.log("call made: ", results);
-              // location.reload();
               placeForReview = results;
-              console.log(placeForReview)
-
+              console.log(placeForReview);
               if (placeForReview) {
                 console.log("THIS LOGIC IS HAPPENING");
-
-                document.getElementById("home-page").style.display = "none";
-                document.querySelector(".places-page").style.display = "none";
-                document.getElementById("placePage").style.display = "block";
+                // $('#placeDetails').html(placeDetailsText({
+                //   image: placeForReview.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }),
+                //   name: placeForReview.name,
+                //   rating: placeForReview.rating,
+                //   address: placeForReview.vicinity,
+                //   open_hours: placeForReview.opening_hours.open_now ? "OPEN NOW" : "CLOSED",
+                //   types: placeForReview.types[0]
+                // }));
               }
-
             }
-          })
+          });
 
         } else {
           //nearbyLoc is an array. filter and get correct element
@@ -190,28 +193,29 @@ function getPlace(id) {
     // });
 
     $('#submitReview').click(function () {
-
       let user_name = $("#user_name").val();
       rating = rating;
       let review = $("#review").val();
       let id = placeForReview.id;
+      console.log(id);
+      
       var reviewPost = {
-        place_id: id,
+        place: placeForReview.place_id,
         user_name: user_name,
         rating: rating,
         review: review,
       };
       console.log(reviewPost);
       // review post already gets all the values just hel me by posting them
-      // $.ajax({
-      //   headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      //   type: "POST",
-      //   url: "http://167.99.40.78:9090/api/places/"+ id + "/postReviews",
-      //   data: JSON.stringify(reviewPost),
-      //   success: function (results) {
-      //     console.log("this is the posted data", results);
-      //   }
-      // });
+      $.ajax({
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        type: "POST",
+        url: "http://167.99.40.78:9090/api/places/"+ id + "/postReviews",
+        data: JSON.stringify(reviewPost),
+        success: function (results) {
+          console.log("this is the posted data", results);
+        }
+      });
     })
 
   }
@@ -348,43 +352,20 @@ function createMarker(place) {
 
 $(document).ready(function () {
 
-  // $.ajax({
-  //   headers: { "Accept": "application/json" },
-  //   type: "GET",
-  //   url: "http://localhost:9090/api/myPlace",
-  //   dataType: "json",
-  //   success: function (results) {
-  //     console.log("------------");
-
-  //     console.log(results);
-  //     console.log("---------------");
-
-  //     results.forEach(function (item, index) {
-  //         results: results
-  //     })
-  //   }
-  // });
-
-
-
-  // $.ajax({
-  //   headers: { "Accept": "application/json" },
-  //   type: "GET",
-  //   url: "http://localhost:9090/api/places",
-  //   dataType: "json",
-  //   success: function (results) {
-  //     console.log("-----------------");
-
-  //     console.log(results);
-  //     console.log("-----------------");
-
-  //     results.forEach(function (item, index) {
-  //       $('.collection').html(nearbyText({
-  //         results: results
-  //       }));
-  //     })
-  //   }
-  // });
+  $.ajax({
+    headers: {
+      "Accept": "application/json"
+    },
+    type: "GET",
+    url: API_URL + "/api/getReviews",
+    dataType: "json", 
+    success: function(results) {
+        reviews.push(results);
+        console.log(reviews);
+        
+      
+    }
+  })
 
   Handlebars.registerHelper('placeRating', function (index) {
     return "rateYo" + index;
